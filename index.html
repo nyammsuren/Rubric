@@ -1,0 +1,514 @@
+export default function NNRubricEvaluator() {
+  const rubric = [
+    {
+      id: "C1",
+      title: "Сургалтын зорилго, үр дүн, үнэлгээний уялдаа",
+      max: 72,
+      indicators: [
+        {
+          id: "C1.1",
+          title: "CLO-ийн тодорхой байдал",
+          levels: [
+            { score: 0, label: "1", text: "CLO тодорхой бус, хэмжигдэхүйц үйл үг ашиглаагүй" },
+            { score: 3, label: "2", text: "CLO тодорхой боловч хэмжигдэхүйц байдал сул" },
+            { score: 6, label: "3", text: "CLO хэмжигдэхүйц, Блумийн түвшин тодорхой" },
+            { score: 9, label: "4", text: "CLO шаталсан, гүйцэтгэлийн түвшинг илэрхийлсэн, бодит чадварт чиглэсэн" },
+          ],
+        },
+        {
+          id: "C1.2",
+          title: "CLO ба агуулгын нийцэл",
+          levels: [
+            { score: 0, label: "1", text: "Агуулга болон CLO-ийн логик холбоо сул" },
+            { score: 3, label: "2", text: "Зарим агуулга CLO-д нийцсэн боловч дутуу хэсэг байна" },
+            { score: 6, label: "3", text: "Агуулга CLO-г системтэй дэмжсэн" },
+            { score: 9, label: "4", text: "Агуулга шаталсан, CLO бүрийг нотолгоонд суурилан хөгжүүлсэн" },
+          ],
+        },
+        {
+          id: "C1.3",
+          title: "CLO ба сургалтын үйл ажиллагааны нийцэл",
+          levels: [
+            { score: 0, label: "1", text: "Даалгавар CLO-г хэмжихгүй" },
+            { score: 3, label: "2", text: "Зарим үйл ажиллагаа нь CLO-той холбоотой боловч логик сул" },
+            { score: 6, label: "3", text: "Сургалтын үйл ажиллагаа нь CLO-г бодитоор хэрэгжүүлсэн" },
+            { score: 9, label: "4", text: "Сургалтын үйл ажиллагаа нь шаталсан, ахисан түвшний чадвар хөгжүүлэхээр зохион байгуулагдсан" },
+          ],
+        },
+        {
+          id: "C1.4",
+          title: "CLO ба үнэлгээний даалгаврын нийцэл",
+          levels: [
+            { score: 0, label: "1", text: "Үнэлгээний даалгавар CLO-г хэмжих боломжгүй" },
+            { score: 3, label: "2", text: "Үнэлгээний зарим даалгавар CLO-г хэмжсэн боловч бүрэн бус" },
+            { score: 6, label: "3", text: "Үнэлгээний даалгавар CLO бүрийг хэмжсэн" },
+            { score: 9, label: "4", text: "Үнэлгээний даалгавар бүр CLO-ийн үйл үг, Блумийн түвшинд таарсан" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "C2",
+      title: "Агуулгын чанар",
+      max: 72,
+      indicators: [
+        {
+          id: "C2.1",
+          title: "Шинжлэх ухааны үндэслэл",
+          levels: [
+            { score: 0, label: "1", text: "Онолын суурь сул, тайлбар ерөнхий" },
+            { score: 3, label: "2", text: "Үндсэн ойлголтыг тайлбарласан боловч судалгааны нотолгоо хангалтгүй" },
+            { score: 6, label: "3", text: "Онол, судалгаанд тулгуурласан, жишээ болон баримтаар бататгасан" },
+            { score: 9, label: "4", text: "Олон эх сурвалжийг харьцуулан уялдуулж, шүүмжлэлтэй задлан шинжилсэн" },
+          ],
+        },
+        {
+          id: "C2.2",
+          title: "Эх сурвалжийн чанар",
+          levels: [
+            { score: 0, label: "1", text: "Эх сурвалж дутуу эсвэл хуучирсан" },
+            { score: 3, label: "2", text: "Эх сурвалж ашигласан боловч шинэчлэлт, төрөлжилт хангалтгүй" },
+            { score: 6, label: "3", text: "Сүүлийн үеийн, шинжлэх ухааны болон бодлогын эх сурвалж ашигласан" },
+            { score: 9, label: "4", text: "Мэргэжлийн сэтгүүл, бодлогын баримт бичиг, OER зэрэг олон төрөлт эх сурвалжийг уялдуулсан" },
+          ],
+        },
+        {
+          id: "C2.3",
+          title: "Материалын боловсруулалт",
+          levels: [
+            { score: 0, label: "1", text: "Өнгөц ойлголт давамгай" },
+            { score: 3, label: "2", text: "Үндсэн агуулгыг тайлбарласан" },
+            { score: 6, label: "3", text: "Агуулга задлан шинжилсэн, харьцуулсан" },
+            { score: 9, label: "4", text: "Онол, хэрэглээ, судалгааны үр дүнг уялдуулсан, интеграцчилсан байдлаар боловсруулсан" },
+          ],
+        },
+        {
+          id: "C2.4",
+          title: "Агуулгын бодит хэрэглээ",
+          levels: [
+            { score: 0, label: "1", text: "Мэдээлэл дамжуулах хэлбэр давамгай" },
+            { score: 3, label: "2", text: "Зарим нэг бодит хэрэглээний жишээ орсон" },
+            { score: 6, label: "3", text: "Асуудалд суурилсан, кейс, жишээ агуулсан" },
+            { score: 9, label: "4", text: "Бодит нөхцөл байдал, мэргэжлийн хэрэглээтэй системтэй холбосон" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "C3",
+      title: "Сургалтын дизайн ба мультимедиа",
+      max: 72,
+      indicators: [
+        {
+          id: "C3.1",
+          title: "Видео ба мультимедиа бүтэц",
+          levels: [
+            { score: 0, label: "1", text: "Эмх цэгцгүй, логик дараалалгүй" },
+            { score: 3, label: "2", text: "Ерөнхий дараалалтай боловч агуулгын шилжилт сул" },
+            { score: 6, label: "3", text: "Модульчилсан, логик дараалалтай" },
+            { score: 9, label: "4", text: "Богино, зорилтот нэгжүүдэд задлан, шаталсан байдлаар зохион байгуулсан" },
+          ],
+        },
+        {
+          id: "C3.2",
+          title: "Танин мэдэхүйн ачаалал",
+          levels: [
+            { score: 0, label: "1", text: "Мэдээлэл хэт их, нэг дор төвлөрсөн, танин мэдэхүйн ачаалал өндөр" },
+            { score: 3, label: "2", text: "Агуулгыг хуваарилсан боловч зарим хэсэгт мэдээллийн нягтрал их" },
+            { score: 6, label: "3", text: "Агуулгыг хэмжээгээр тохируулж, мэдээллийн нягтралыг зохистой хуваарилсан" },
+            { score: 9, label: "4", text: "Чухал агуулгыг онцлон тодруулж, илүүдэл давхардлыг багасган, мэдээллийн урсгалыг суралцах үйл явцад нийцүүлэн оновчтой зохион байгуулсан" },
+          ],
+        },
+        {
+          id: "C3.3",
+          title: "Дизайн ба визуал зохион байгуулалт",
+          levels: [
+            { score: 0, label: "1", text: "Дизайн зохион байгуулалт сул" },
+            { score: 3, label: "2", text: "Ерөнхий дизайнтай боловч визуал зохицол сул" },
+            { score: 6, label: "3", text: "Өнгө, фонт, график, зай зохистой нэгдмэл дизайнтай" },
+            { score: 9, label: "4", text: "Хэрэглэгчийн туршлагад (UX) суурилсан, суралцахуйг дэмжсэн дизайнтай" },
+          ],
+        },
+        {
+          id: "C3.4",
+          title: "Хичээлийн дотоод логик",
+          levels: [
+            { score: 0, label: "1", text: "Агуулга, үйл ажиллагаа, үнэлгээ хоорондын уялдаа сул" },
+            { score: 3, label: "2", text: "Зарим хэсэг нь логик уялдаатай" },
+            { score: 6, label: "3", text: "Логик уялдаа сайтай, дараалсан урсгалтай" },
+            { score: 9, label: "4", text: "Энгийнээс төвөгтэй рүү шаталсан, суралцахуйг дэмжсэн, логик уялдаа бүхий" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "C4",
+      title: "Онлайн харилцаа ба оролцоо",
+      max: 72,
+      indicators: [
+        {
+          id: "C4.1",
+          title: "Танин мэдэхүйн оролцоо",
+          levels: [
+            { score: 0, label: "1", text: "Задлан шинжлэх шаардлага бага" },
+            { score: 3, label: "2", text: "Зарим нэг харьцуулах, тайлбарлах даалгавартай" },
+            { score: 6, label: "3", text: "Задлан шинжлэх, нэгтгэн дүгнэх даалгавартай" },
+            { score: 9, label: "4", text: "Асуудал дэвшүүлэх, мэдээлэл цуглуулах, задлан шинжлэх, дүгнэлт гаргах 4 үе шат тодорхой ажиглагдсан" },
+          ],
+        },
+        {
+          id: "C4.2",
+          title: "Нийгмийн оролцоо",
+          levels: [
+            { score: 0, label: "1", text: "Оюутан хоорондын харилцаа бараг байхгүй, идэвхгүй оролцоо давамгай" },
+            { score: 3, label: "2", text: "Хэлэлцүүлэг байгаа боловч оюутнуудын оролцоо бага" },
+            { score: 6, label: "3", text: "Суралцагчид харилцан хариу бичиж, хэлэлцүүлэгт тогтмол оролцсон" },
+            { score: 9, label: "4", text: "Суралцагчдын ≥70% нь 2 ба түүнээс дээш чанартай хариу бичсэн, хамтын санаа хөгжүүлэлт ажиглагдсан" },
+          ],
+        },
+        {
+          id: "C4.3",
+          title: "Багшийн оролцоо",
+          levels: [
+            { score: 0, label: "1", text: "Чиглүүлэлтгүй, багшийн идэвхтэй оролцоо бараг ажиглагдахгүй" },
+            { score: 3, label: "2", text: "Зарим зааварчилгаа, тайлбар өгсөн боловч тогтвортой чиглүүлэг хийгдээгүй" },
+            { score: 6, label: "3", text: "Тогтмол чиглүүлэг хийж дэмжлэг үзүүлэн, суралцах үйл явцыг удирдан чиглүүлсэн" },
+            { score: 9, label: "4", text: "Суралцагчдын гүйцэтгэл, оролцоо, эргэх холбоонд үндэслэн агуулга, даалгавар, чиглүүлгийг бодитоор өөрчилж, сургалтын явцыг уян хатан зохицуулсан нь баримтаар нотлогдсон" },
+          ],
+        },
+        {
+          id: "C4.4",
+          title: "Хэлэлцүүлгийн бүтэц / багшийн зохион байгуулалт",
+          levels: [
+            { score: 0, label: "1", text: "Нээлттэй боловч чиглэлгүй, тодорхой зорилгогүй" },
+            { score: 3, label: "2", text: "Ерөнхий удирдамжтай, оролцооны шаардлага бага" },
+            { score: 6, label: "3", text: "Чиглүүлсэн асуулт болон тодорхой үнэлгээний шалгууртай" },
+            { score: 9, label: "4", text: "Танин мэдэхүйн шаталсан асуулт, оролцооны тодорхой шаардлага, үнэлгээний шалгуур, эргэцүүлэл шаардсан бүтэцтэй" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "C5",
+      title: "Үнэлгээ ба эргэх холбоо",
+      max: 72,
+      indicators: [
+        {
+          id: "C5.1",
+          title: "Явцын ба гүйцэтгэлийн үнэлгээ",
+          levels: [
+            { score: 0, label: "1", text: "Явцын үнэлгээний механизм байхгүй" },
+            { score: 3, label: "2", text: "Зарим богино сорил, шалгалт орсон боловч сургалтын зорилго, дараалалтай уялдсан системтэй төлөвлөлтгүй" },
+            { score: 6, label: "3", text: "Бүлэг сэдэв бүрт багадаа 1 сорил, явцын үнэлгээ орсон" },
+            { score: 9, label: "4", text: "Дахин гүйцэтгэх боломжтой, эргэх холбоонд суурилсан, суралцагчийн ахицыг хянах, сайжруулах чиглэлтэй үнэлгээний тогтолцоо хэрэгжсэн" },
+          ],
+        },
+        {
+          id: "C5.2",
+          title: "Үнэлгээний нээлттэй байдал",
+          levels: [
+            { score: 0, label: "1", text: "Үнэлгээний шалгуур LMS дээр байршаагүй эсвэл суралцагчид харагдахгүй" },
+            { score: 3, label: "2", text: "Рубрик байршуулсан боловч гүйцэтгэлийн түвшний тайлбар бүрэн бус" },
+            { score: 6, label: "3", text: "Үнэлгээний шалгуур (рубрик) нийтэд нээлттэй, ойлгомжтой" },
+            { score: 9, label: "4", text: "Гүйцэтгэлийн түвшин бүрийн дэлгэрэнгүй тайлбар, жишээ бүхий үнэлгээний рубриктэй" },
+          ],
+        },
+        {
+          id: "C5.3",
+          title: "Эргэх холбоо",
+          levels: [
+            { score: 0, label: "1", text: "Эргэх холбоо байхгүй" },
+            { score: 3, label: "2", text: "Эргэх холбоотой боловч хоцрогдсон эсвэл ерөнхий" },
+            { score: 6, label: "3", text: "Даалгаврын дараа ихдээ 72 цагийн дотор эргэх холбоо өгсөн" },
+            { score: 9, label: "4", text: "Суралцагчийн цаашдын хөгжлийг чиглүүлсэн, сайжруулах арга санал болгосон, дахин гүйцэтгэх боломж олгосон" },
+          ],
+        },
+        {
+          id: "C5.4",
+          title: "Чацуутны ба өөрийн үнэлгээ",
+          levels: [
+            { score: 0, label: "1", text: "Зөвхөн багш үнэлдэг" },
+            { score: 3, label: "2", text: "Зөвхөн өөрийн эсвэл зөвхөн чацуутны үнэлгээтэй" },
+            { score: 6, label: "3", text: "Багшийн үнэлгээг чацуутны эсвэл өөрийн үнэлгээтэй хослуулж хэрэглэсэн" },
+            { score: 9, label: "4", text: "Өөрийн, чацуутны болон багшийн гэсэн 3 үнэлгээг хослуулж хэрэглэсэн" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "C6",
+      title: "Технологийн интеграц ба сургалтын орчин",
+      max: 72,
+      indicators: [
+        {
+          id: "C6.1",
+          title: "Сургалтын орчны бүтэц ба удирдлага",
+          levels: [
+            { score: 0, label: "1", text: "Эмх замбараагүй" },
+            { score: 3, label: "2", text: "Ерөнхий модуль бүтэцтэй боловч нэршил, дараалал бүрэн тодорхой бус" },
+            { score: 6, label: "3", text: "Хичээл бүр модультай, модуль бүрт зорилго, агуулга, даалгавар бүтэц тодорхой байрласан" },
+            { score: 9, label: "4", text: "Суралцагч ≤3 даралтаар үндсэн агуулгад хүрэх боломжтой, төөрөх эрсдэлгүй сургалтын орчин бүрдсэн" },
+          ],
+        },
+        {
+          id: "C6.2",
+          title: "Хичээлийн дотоод зохион байгуулалт",
+          levels: [
+            { score: 0, label: "1", text: "Агуулга дараалалгүй байрласан" },
+            { score: 3, label: "2", text: "Ерөнхий дараалалтай боловч шатлал сул" },
+            { score: 6, label: "3", text: "Модуль/нэгжид нөхцөлт нээлт ашигласан эсвэл төгсгөлд нь үнэлгээ оруулсан" },
+            { score: 9, label: "4", text: "Модуль/нэгжид нөхцөлт нээлт ашигласан болон төгсгөлд нь үнэлгээ байрласан ахицтай дараалалтай" },
+          ],
+        },
+        {
+          id: "C6.3",
+          title: "Технологийн интеграц",
+          levels: [
+            { score: 0, label: "1", text: "Технологийг зөвхөн байршуулах зорилгоор ашигласан" },
+            { score: 3, label: "2", text: "Технологийг тодорхой хэсэгт ашигласан боловч зорилготой бүрэн уялдаагүй" },
+            { score: 6, label: "3", text: "Технологийн хэрэглээ сургалтын зорилго, үйл ажиллагаатай уялдсан" },
+            { score: 9, label: "4", text: "Технологи нь агуулга, үйл ажиллагаа, үнэлгээтэй холбогдсон (жишээ: видео → даалгавар → үнэлгээ)" },
+          ],
+        },
+        {
+          id: "C6.4",
+          title: "Хүртээмж",
+          levels: [
+            { score: 0, label: "1", text: "Хүртээмжийн шаардлагыг огт харгалзаагүй" },
+            { score: 3, label: "2", text: "Зарим хэсэгт хүртээмжийн тохируулга хийсэн" },
+            { score: 6, label: "3", text: "Сабтайтл, зургийн тайлбар, уншихад ээлтэй фонт, өнгө зэрэг үндсэн шаардлагыг хангасан" },
+            { score: 9, label: "4", text: "UDL зарчимд нийцүүлэн нэг агуулгыг олон хэлбэр (текст, видео, аудио, интерактив гэх мэт)-ээр хүргэсэн" },
+          ],
+        },
+      ],
+    },
+  ];
+
+  const { useMemo, useState } = React;
+
+  const initialScores = rubric.flatMap((criterion) =>
+    criterion.indicators.map((indicator) => [indicator.id, null])
+  );
+
+  const [scores, setScores] = useState(Object.fromEntries(initialScores));
+  const [courseName, setCourseName] = useState("");
+  const [evaluator, setEvaluator] = useState("");
+  const [notes, setNotes] = useState("");
+
+  const criterionTotals = useMemo(() => {
+    return rubric.map((criterion) => {
+      const total = criterion.indicators.reduce((sum, ind) => sum + (scores[ind.id] ?? 0), 0);
+      return { ...criterion, total };
+    });
+  }, [scores]);
+
+  const totalScore = criterionTotals.reduce((sum, c) => sum + c.total, 0);
+  const maxScore = rubric.reduce((sum, c) => sum + c.max, 0);
+  const percent = Math.round((totalScore / maxScore) * 100);
+
+  const performanceLabel =
+    percent >= 90
+      ? "Маш өндөр чанартай"
+      : percent >= 75
+      ? "Сайн"
+      : percent >= 60
+      ? "Дунд"
+      : "Сайжруулах шаардлагатай";
+
+  const setIndicatorScore = (indicatorId, score) => {
+    setScores((prev) => ({ ...prev, [indicatorId]: score }));
+  };
+
+  const resetAll = () => {
+    setScores(Object.fromEntries(initialScores));
+    setCourseName("");
+    setEvaluator("");
+    setNotes("");
+  };
+
+  const exportJSON = () => {
+    const payload = {
+      courseName,
+      evaluator,
+      notes,
+      totalScore,
+      maxScore,
+      percent,
+      performanceLabel,
+      criterionTotals: criterionTotals.map((c) => ({ id: c.id, title: c.title, total: c.total, max: c.max })),
+      scores,
+      exportedAt: new Date().toISOString(),
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `nn-rubric-${courseName || "course"}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900">
+      <div className="mx-auto max-w-7xl px-4 py-6 md:px-6">
+        <div className="mb-6 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight text-slate-900">Онлайн сургалтыг үнэлэх НН шалгуур</h1>
+              <p className="mt-2 text-sm text-slate-600">
+                Нийт дээд оноо: <span className="font-semibold">{maxScore}</span>. Гүйцэтгэлийн хувь = (авсан оноо / {maxScore}) × 100.
+              </p>
+              <p className="mt-1 text-sm text-slate-600">Шалгуур бүрийг ижил жинтэй гэж үзэж, шалгуур тус бүрийн дээд оноог 72 байхаар тогтоов.</p>
+            </div>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+              <div className="rounded-2xl bg-slate-100 p-4 text-center">
+                <div className="text-xs text-slate-500">Нийт оноо</div>
+                <div className="mt-1 text-2xl font-bold">{totalScore}</div>
+              </div>
+              <div className="rounded-2xl bg-slate-100 p-4 text-center">
+                <div className="text-xs text-slate-500">Хувь</div>
+                <div className="mt-1 text-2xl font-bold">{Number.isFinite(percent) ? `${percent}%` : "0%"}</div>
+              </div>
+              <div className="rounded-2xl bg-slate-100 p-4 text-center col-span-2">
+                <div className="text-xs text-slate-500">Түвшин</div>
+                <div className="mt-1 text-xl font-semibold">{performanceLabel}</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-3 md:grid-cols-3">
+            <div>
+              <label className="mb-1 block text-sm font-medium text-slate-700">Хичээлийн нэр</label>
+              <input
+                className="w-full rounded-xl border border-slate-300 px-3 py-2 outline-none ring-0 focus:border-slate-500"
+                value={courseName}
+                onChange={(e) => setCourseName(e.target.value)}
+                placeholder="Жишээ: Компьютерийн сүлжээ"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-sm font-medium text-slate-700">Үнэлэгчийн нэр</label>
+              <input
+                className="w-full rounded-xl border border-slate-300 px-3 py-2 outline-none ring-0 focus:border-slate-500"
+                value={evaluator}
+                onChange={(e) => setEvaluator(e.target.value)}
+                placeholder="Жишээ: Эксперт 1"
+              />
+            </div>
+            <div className="flex items-end gap-2">
+              <button onClick={exportJSON} className="w-full rounded-xl bg-slate-900 px-4 py-2 font-medium text-white hover:bg-slate-800">
+                JSON татах
+              </button>
+              <button onClick={resetAll} className="rounded-xl border border-slate-300 px-4 py-2 font-medium text-slate-700 hover:bg-slate-100">
+                Цэвэрлэх
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <label className="mb-1 block text-sm font-medium text-slate-700">Тэмдэглэл</label>
+            <textarea
+              className="min-h-[90px] w-full rounded-xl border border-slate-300 px-3 py-2 outline-none focus:border-slate-500"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Нэмэлт тайлбар, ажиглалт"
+            />
+          </div>
+        </div>
+
+        <div className="grid gap-6 xl:grid-cols-[1fr_320px]">
+          <div className="space-y-6">
+            {criterionTotals.map((criterion) => (
+              <div key={criterion.id} className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+                <div className="mb-4 flex flex-col gap-2 border-b border-slate-200 pb-4 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">{criterion.id}</div>
+                    <h2 className="text-xl font-bold text-slate-900">{criterion.title}</h2>
+                  </div>
+                  <div className="rounded-2xl bg-slate-100 px-4 py-3 text-sm text-slate-700">
+                    Оноо: <span className="font-bold text-slate-900">{criterion.total}</span> / {criterion.max}
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  {criterion.indicators.map((indicator) => (
+                    <div key={indicator.id} className="rounded-2xl border border-slate-200 p-4">
+                      <div className="mb-3 flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
+                        <div>
+                          <div className="text-xs font-medium text-slate-500">{indicator.id}</div>
+                          <div className="text-lg font-semibold text-slate-900">{indicator.title}</div>
+                        </div>
+                        <div className="text-sm text-slate-600">
+                          Сонгосон оноо: <span className="font-bold text-slate-900">{scores[indicator.id] ?? "—"}</span>
+                        </div>
+                      </div>
+
+                      <div className="grid gap-3">
+                        {indicator.levels.map((level) => {
+                          const active = scores[indicator.id] === level.score;
+                          return (
+                            <button
+                              key={`${indicator.id}-${level.score}`}
+                              type="button"
+                              onClick={() => setIndicatorScore(indicator.id, level.score)}
+                              className={`rounded-2xl border p-4 text-left transition ${
+                                active
+                                  ? "border-slate-900 bg-slate-900 text-white"
+                                  : "border-slate-200 bg-white hover:border-slate-400 hover:bg-slate-50"
+                              }`}
+                            >
+                              <div className="flex items-start justify-between gap-3">
+                                <div className="text-sm font-bold">Түвшин {level.label}</div>
+                                <div className={`rounded-full px-2 py-1 text-xs font-semibold ${active ? "bg-white/20 text-white" : "bg-slate-100 text-slate-700"}`}>
+                                  {level.score} оноо
+                                </div>
+                              </div>
+                              <p className={`mt-2 text-sm leading-6 ${active ? "text-slate-100" : "text-slate-700"}`}>{level.text}</p>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="space-y-4">
+            <div className="sticky top-4 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+              <h3 className="text-lg font-bold text-slate-900">Шалгуурын нэгтгэл</h3>
+              <div className="mt-4 space-y-3">
+                {criterionTotals.map((criterion) => {
+                  const ratio = Math.round((criterion.total / criterion.max) * 100);
+                  return (
+                    <div key={`summary-${criterion.id}`}>
+                      <div className="mb-1 flex items-center justify-between text-sm">
+                        <span className="font-medium text-slate-700">{criterion.id}</span>
+                        <span className="font-semibold text-slate-900">{criterion.total}/{criterion.max}</span>
+                      </div>
+                      <div className="h-2 overflow-hidden rounded-full bg-slate-100">
+                        <div className="h-full rounded-full bg-slate-900" style={{ width: `${ratio}%` }} />
+                      </div>
+                      <div className="mt-1 text-xs text-slate-500">{criterion.title}</div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-6 rounded-2xl bg-slate-50 p-4 text-sm text-slate-700">
+                <div className="font-semibold text-slate-900">Тайлбарлах босго</div>
+                <div className="mt-2 space-y-1">
+                  <div>90–100% → Маш өндөр чанартай</div>
+                  <div>75–89% → Сайн</div>
+                  <div>60–74% → Дунд</div>
+                  <div>&lt;60% → Сайжруулах шаардлагатай</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
