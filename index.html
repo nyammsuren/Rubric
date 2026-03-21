@@ -201,7 +201,7 @@
         <div class="field"><label>Хичээлийн код</label><input id="courseCode" placeholder="Жишээ: M.IT203" /></div>
         <div class="field"><label>Үнэлэгчийн нэр</label><input id="evaluator" placeholder="Жишээ: Эксперт 1" /></div>
         <div class="field"><label>Огноо</label><input id="evalDate" type="date" /></div>
-        <button class="btn btn-success" onclick="sevaluate()">Үнэлэх</button>
+    <button class="btn btn-success" id="submitBtn">Үнэлэх</button>
         <button class="btn btn-primary" id="excelBtn">Excel татах</button>
         <button class="btn btn-ghost" id="resetBtn">Цэвэрлэх</button>
       </div>
@@ -609,24 +609,23 @@
       }
     }
 
-    async function sevaluate() {
-      const payload = getPayload();
+    async function submitEvaluation() {
+  const payload = getPayload();
 
-      if (!payload.courseName || !payload.courseCode || !payload.evaluator) {
-        showStatus("Хичээлийн нэр, код, үнэлэгчийн нэрийг бүрэн оруулна уу.", false);
-        return;
-      }
+  if (!payload.courseName || !payload.courseCode || !payload.evaluator) {
+    showStatus("Хичээлийн нэр, код, үнэлэгчийн нэрийг бүрэн оруулна уу.", false);
+    return;
+  }
 
-      const unscored = rubric.flatMap(c => c.indicators).filter(i => state.scores[i.id] == null);
-      if (unscored.length) {
-        showStatus(`Бүх үзүүлэлтийг үнэлнэ үү. Үлдсэн: ${unscored.length}`, false);
-        return;
-      }
+  const unscored = rubric.flatMap(c => c.indicators).filter(i => state.scores[i.id] == null);
+  if (unscored.length) {
+    showStatus(`Бүх үзүүлэлтийг үнэлнэ үү. Үлдсэн: ${unscored.length}`, false);
+    return;
+  }
 
-      await submitToGoogleSheet(payload);
-      showStatus("Хадгалах хүсэлт илгээгдлээ. Responses sheet-ээ шалгана уу.", true);
-    }
-
+  await submitToGoogleSheet(payload);
+  showStatus("Хадгалах хүсэлт илгээгдлээ.", true);
+}
     function resetAll(){
       state.scores = {};
       ["courseName","courseCode","evaluator","notes","evalDate"].forEach(id => {
@@ -637,10 +636,11 @@
       renderCriteria();
       renderSummary();
     }
-
+const submitBtn = document.getElementById("submitBtn");
+if (submitBtn) submitBtn.addEventListener("click", submitEvaluation);
     document.getElementById("resetBtn").addEventListener("click", resetAll);
     document.getElementById("excelBtn").addEventListener("click", downloadExcelCSV);
-    document.getElementById("submitBtn").addEventListener("click", sevaluate);
+
 
     renderCriteria();
     renderSummary();
