@@ -17,49 +17,94 @@
       --amber:#f59e0b;
       --red:#ef4444;
       --shadow:0 10px 28px rgba(15, 23, 42, .08);
-      --radius:18px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:linear-gradient(180deg,#f8fbff 0%, #f5f7fb 100%);
-      color:var(--text);
+      color:var(--text)
     }
     .wrap{max-width:1480px;margin:0 auto;padding:24px}
     .hero{
       background:linear-gradient(135deg,#2242bb 0%, #4d7cff 100%);
-      color:#fff;border-radius:24px;padding:28px;box-shadow:var(--shadow);margin-bottom:24px;
+      color:#fff;border-radius:24px;padding:28px;box-shadow:var(--shadow);margin-bottom:24px
     }
     .hero h1{margin:0 0 8px;font-size:34px;line-height:1.1}
     .hero p{margin:6px 0;color:rgba(255,255,255,.92)}
-    .meta{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr auto auto;gap:12px;margin-top:18px}
-    .field{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:12px 14px}
-    .field label{display:block;font-size:12px;margin-bottom:6px;color:rgba(255,255,255,.85)}
-    .field input,.field textarea{width:100%;border:none;outline:none;background:transparent;color:#fff;font-size:14px}
+    .meta{
+      display:grid;
+      grid-template-columns:1.1fr 1fr 1fr 1fr 1.2fr auto auto auto;
+      gap:12px;margin-top:18px
+    }
+    .field{
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:14px;padding:12px 14px
+    }
+    .field label{
+      display:block;font-size:12px;margin-bottom:6px;color:rgba(255,255,255,.85)
+    }
+    .field input,.field textarea{
+      width:100%;border:none;outline:none;background:transparent;color:#fff;font-size:14px
+    }
     .field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.6)}
-    .btn{border:none;cursor:pointer;border-radius:14px;padding:12px 16px;font-weight:800;transition:.2s ease}
+    .btn{
+      border:none;cursor:pointer;border-radius:14px;padding:12px 16px;
+      font-weight:800;transition:.2s ease;white-space:nowrap
+    }
     .btn-primary{background:#fff;color:#2242bb}
     .btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.22)}
+    .btn-success{background:#0f9d58;color:#fff}
     .btn:hover{transform:translateY(-1px)}
-    .layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;align-items:start}
+
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 380px;
+      gap:24px;align-items:start
+    }
     .criteria{display:flex;flex-direction:column;gap:18px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
-    .criterion-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;background:#fbfcff;border-bottom:1px solid var(--line)}
+    .card{
+      background:var(--card);border:1px solid var(--line);
+      border-radius:24px;box-shadow:var(--shadow);overflow:hidden
+    }
+    .criterion-head{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      padding:18px 20px;background:#fbfcff;border-bottom:1px solid var(--line)
+    }
     .criterion-title{font-size:22px;font-weight:800;margin:0}
-    .score-pill{background:var(--primary-soft);color:var(--primary);border:1px solid #d8e2ff;padding:10px 14px;border-radius:999px;font-weight:800;white-space:nowrap}
+    .score-pill{
+      background:var(--primary-soft);color:var(--primary);
+      border:1px solid #d8e2ff;padding:10px 14px;border-radius:999px;
+      font-weight:800;white-space:nowrap
+    }
     .indicator{padding:18px 20px;border-top:1px solid var(--line)}
     .indicator:first-child{border-top:none}
     .indicator-top{display:flex;justify-content:space-between;gap:16px;margin-bottom:12px}
-    .indicator-code{font-size:12px;font-weight:700;color:var(--primary);background:var(--primary-soft);border:1px solid #dbe5ff;padding:4px 8px;border-radius:999px;display:inline-block;margin-bottom:8px}
+    .indicator-code{
+      font-size:12px;font-weight:700;color:var(--primary);background:var(--primary-soft);
+      border:1px solid #dbe5ff;padding:4px 8px;border-radius:999px;display:inline-block;margin-bottom:8px
+    }
     .indicator-title{font-size:18px;font-weight:700;margin:0}
     .indicator-value{color:var(--muted);font-size:14px;white-space:nowrap}
     .levels{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .level{border:1px solid var(--line);border-radius:18px;padding:14px;cursor:pointer;transition:.18s ease;background:#fff;min-height:118px}
-    .level:hover{border-color:#b8c8ff;box-shadow:0 6px 18px rgba(49,94,251,.08);transform:translateY(-1px)}
-    .level.active{border-color:var(--primary);background:linear-gradient(180deg,#f4f7ff 0%, #eef3ff 100%);box-shadow:0 10px 24px rgba(49,94,251,.12)}
+    .level{
+      border:1px solid var(--line);border-radius:18px;padding:14px;cursor:pointer;
+      transition:.18s ease;background:#fff;min-height:118px
+    }
+    .level:hover{
+      border-color:#b8c8ff;box-shadow:0 6px 18px rgba(49,94,251,.08);transform:translateY(-1px)
+    }
+    .level.active{
+      border-color:var(--primary);
+      background:linear-gradient(180deg,#f4f7ff 0%, #eef3ff 100%);
+      box-shadow:0 10px 24px rgba(49,94,251,.12)
+    }
     .level-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
-    .level-tag{font-size:12px;font-weight:800;color:#3c4b68;background:#f1f4fb;padding:4px 8px;border-radius:999px}
+    .level-tag{
+      font-size:12px;font-weight:800;color:#3c4b68;background:#f1f4fb;
+      padding:4px 8px;border-radius:999px
+    }
     .level.active .level-tag{background:#dfe8ff;color:#2341b8}
     .level-score{font-size:12px;font-weight:800;color:#2341b8}
     .level-text{font-size:14px;line-height:1.55;color:#334155}
@@ -68,32 +113,80 @@
     .summary{padding:20px}
     .summary h3{margin:0 0 14px;font-size:22px}
     .big-score{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-    .stat{background:#f8faff;border:1px solid var(--line);border-radius:18px;padding:14px;text-align:center}
+    .stat{
+      background:#f8faff;border:1px solid var(--line);border-radius:18px;
+      padding:14px;text-align:center
+    }
     .stat .label{font-size:12px;color:var(--muted);margin-bottom:6px}
     .stat .value{font-size:28px;font-weight:900}
-    .quality{border-radius:18px;padding:14px;font-weight:800;text-align:center;margin-bottom:14px;border:1px solid var(--line);background:#f9fafb}
+    .quality{
+      border-radius:18px;padding:14px;font-weight:800;text-align:center;
+      margin-bottom:14px;border:1px solid var(--line);background:#f9fafb
+    }
     .bars{display:flex;flex-direction:column;gap:12px}
     .bar-wrap{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px}
     .bar-top{display:flex;justify-content:space-between;gap:12px;margin-bottom:8px;font-size:13px}
     .bar{height:9px;border-radius:999px;background:#edf1f7;overflow:hidden}
-    .bar > div{height:100%;background:linear-gradient(90deg,#315efb 0%, #6a8cff 100%);width:0%;transition:width .25s ease}
-    .legend{margin-top:14px;border-top:1px dashed var(--line);padding-top:14px;color:var(--muted);font-size:13px;line-height:1.6}
+    .bar > div{
+      height:100%;background:linear-gradient(90deg,#315efb 0%, #6a8cff 100%);
+      width:0%;transition:width .25s ease
+    }
+    .legend{
+      margin-top:14px;border-top:1px dashed var(--line);padding-top:14px;
+      color:var(--muted);font-size:13px;line-height:1.6
+    }
+
     .notes-box{padding:18px 20px}
-    .notes-box textarea{width:100%;min-height:120px;border:1px solid var(--line);border-radius:16px;padding:12px 14px;font:inherit;resize:vertical;outline:none}
-    .footer-note{margin-top:14px;font-size:13px;color:var(--muted)}
+    .notes-box textarea{
+      width:100%;min-height:120px;border:1px solid var(--line);border-radius:16px;
+      padding:12px 14px;font:inherit;resize:vertical;outline:none
+    }
 
     .dashboard{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:16px}
-    .gauge-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow)}
+    .gauge-card{
+      background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow)
+    }
     .gauge-title{font-weight:800;margin:0 0 6px;font-size:16px}
     .gauge-sub{font-size:12px;color:var(--muted);margin-bottom:8px}
     .gauge-wrap{display:flex;align-items:center;justify-content:center}
-    .ai-box{margin-top:10px;padding:12px 14px;border-radius:14px;background:#f8fbff;border:1px solid #dbe5ff}
+    .ai-box{
+      margin-top:10px;padding:12px 14px;border-radius:14px;background:#f8fbff;border:1px solid #dbe5ff
+    }
     .ai-title{font-size:12px;font-weight:800;color:#315efb;margin-bottom:6px}
-    .ai-text{font-size:13px;line-height:1.55;color:#334155}
+    .ai-text{font-size:13px;line-height:1.6;color:#334155}
 
-    @media (max-width: 1180px){.layout{grid-template-columns:1fr}.side{position:static}.dashboard{grid-template-columns:1fr 1fr 1fr}}
-    @media (max-width: 900px){.meta{grid-template-columns:1fr 1fr}.dashboard{grid-template-columns:1fr 1fr}}
-    @media (max-width: 700px){.wrap{padding:14px}.hero{padding:18px}.hero h1{font-size:28px}.levels{grid-template-columns:1fr}.meta{grid-template-columns:1fr}.criterion-head{flex-direction:column;align-items:flex-start}.big-score{grid-template-columns:1fr}.dashboard{grid-template-columns:1fr}}
+    .overall-ai{padding:18px 20px}
+    .overall-ai ul{margin:8px 0 0 18px;padding:0}
+    .overall-ai li{margin:6px 0;line-height:1.55}
+
+    .status{
+      font-size:13px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);
+      background:#fff;display:none
+    }
+    .status.show{display:block}
+    .status.ok{color:#0f9d58;background:#eefcf4;border-color:#c9efd7}
+    .status.err{color:#b42318;background:#fff4f2;border-color:#f6d0ca}
+
+    @media (max-width: 1280px){
+      .layout{grid-template-columns:1fr}
+      .side{position:static}
+      .dashboard{grid-template-columns:1fr 1fr 1fr}
+      .meta{grid-template-columns:1fr 1fr 1fr 1fr}
+    }
+    @media (max-width: 900px){
+      .meta{grid-template-columns:1fr 1fr}
+      .dashboard{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 700px){
+      .wrap{padding:14px}
+      .hero{padding:18px}
+      .hero h1{font-size:28px}
+      .levels{grid-template-columns:1fr}
+      .meta{grid-template-columns:1fr}
+      .criterion-head{flex-direction:column;align-items:flex-start}
+      .big-score{grid-template-columns:1fr}
+      .dashboard{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
@@ -108,15 +201,19 @@
         <div class="field"><label>Хичээлийн код</label><input id="courseCode" placeholder="Жишээ: M.IT203" /></div>
         <div class="field"><label>Үнэлэгчийн нэр</label><input id="evaluator" placeholder="Жишээ: Эксперт 1" /></div>
         <div class="field"><label>Огноо</label><input id="evalDate" type="date" /></div>
-        <button class="btn btn-primary" id="exportBtn">JSON татах</button>
+        <div class="field"><label>Google Sheets Web App URL</label><input id="sheetUrl" placeholder="https://script.google.com/macros/s/.../exec" /></div>
+        <button class="btn btn-success" id="submitBtn">Үнэлэх</button>
+        <button class="btn btn-primary" id="excelBtn">Excel татах</button>
         <button class="btn btn-ghost" id="resetBtn">Цэвэрлэх</button>
       </div>
+      <div id="statusBox" class="status" style="margin-top:12px;"></div>
     </section>
 
     <section class="dashboard" id="dashboard"></section>
 
     <section class="layout">
       <div class="criteria" id="criteria"></div>
+
       <aside class="side">
         <div class="card summary">
           <h3>Нэгтгэл</h3>
@@ -132,9 +229,16 @@
             <div>75–89% → Сайн</div>
             <div>60–74% → Дунд</div>
             <div>&lt;60% → Сайжруулах шаардлагатай</div>
-            <div class="footer-note">Гүйцэтгэлийн хувь = (авсан оноо / 216) × 100</div>
           </div>
         </div>
+
+        <div class="card overall-ai">
+          <h3 style="margin:0 0 10px;font-size:22px;">Нэгдсэн AI зөвлөмж</h3>
+          <div id="overallAiText" style="font-size:14px;line-height:1.65;color:#334155;">
+            Үнэлгээ хийж эхэлмэгц нэгдсэн зөвлөмж энд гарна.
+          </div>
+        </div>
+
         <div class="card notes-box">
           <label for="notes" style="display:block;font-weight:800;margin-bottom:10px;">Тэмдэглэл</label>
           <textarea id="notes" placeholder="Нэмэлт ажиглалт, тайлбар"></textarea>
@@ -145,7 +249,7 @@
 
   <script>
     const rubric = [
-      {id:"Шалгуур 1",title:"Хичээлийн бэлтгэл",max:36,indicators:[
+      {id:"C1",title:"Хичээлийн бэлтгэл",max:36,indicators:[
         {id:"C1.1",title:"CLO-ийн тодорхой байдал",levels:[{score:0,label:"1",text:"CLO тодорхой бус, хэмжигдэхүйц үйл үг ашиглаагүй"},{score:3,label:"2",text:"CLO тодорхой боловч хэмжигдэхүйц байдал сул"},{score:6,label:"3",text:"CLO хэмжигдэхүйц, Блумийн түвшин тодорхой"},{score:9,label:"4",text:"CLO шаталсан, гүйцэтгэлийн түвшинг илэрхийлсэн, бодит чадварт чиглэсэн"}]},
         {id:"C1.2",title:"CLO ба агуулгын нийцэл",levels:[{score:0,label:"1",text:"Агуулга болон CLO-ийн логик холбоо сул"},{score:3,label:"2",text:"Зарим агуулга CLO-д нийцсэн боловч дутуу хэсэг байна"},{score:6,label:"3",text:"Агуулга CLO-г системтэй дэмжсэн"},{score:9,label:"4",text:"Агуулга шаталсан, CLO бүрийг нотолгоонд суурилан хөгжүүлсэн"}]},
         {id:"C1.3",title:"CLO ба сургалтын үйл ажиллагааны нийцэл",levels:[{score:0,label:"1",text:"Даалгавар CLO-г хэмжихгүй"},{score:3,label:"2",text:"Зарим үйл ажиллагаа нь CLO-той холбоотой боловч логик сул"},{score:6,label:"3",text:"Сургалтын үйл ажиллагаа нь CLO-г бодитоор хэрэгжүүлсэн"},{score:9,label:"4",text:"Сургалтын үйл ажиллагаа нь шаталсан, ахисан түвшний чадвар хөгжүүлэхээр зохион байгуулагдсан"}]},
@@ -184,25 +288,58 @@
     ];
 
     const state = { scores: {} };
+
     const criteriaEl = document.getElementById("criteria");
     const barsEl = document.getElementById("bars");
     const dashboardEl = document.getElementById("dashboard");
     const totalScoreEl = document.getElementById("totalScore");
     const totalPercentEl = document.getElementById("totalPercent");
     const qualityLabelEl = document.getElementById("qualityLabel");
+    const overallAiTextEl = document.getElementById("overallAiText");
+    const statusBox = document.getElementById("statusBox");
+
+    const adviceMap = {
+      "C1.1": "CLO-г хэмжигдэхүйц үйл үгтэйгээр дахин томьёолж, Блумийн түвшнийг илүү тодорхой болго.",
+      "C1.2": "Агуулга бүрийг CLO-той нэг бүрчлэн тулгаж, дутуу хамрагдсан CLO-д агуулга нэм.",
+      "C1.3": "Сургалтын үйл ажиллагааг CLO бүрийг бодитоор хэрэгжүүлэх даалгавартай уялдуул.",
+      "C1.4": "Үнэлгээний даалгавар бүрийг CLO-ийн үйл үг болон Блумийн түвшинтэй тааруулан дахин зурагла.",
+
+      "C2.1": "Онолын үндэслэлээ илүү судалгааны эх сурвалж, баримтаар бататга.",
+      "C2.2": "Эх сурвалжаа шинэчилж, эрдэм шинжилгээний өгүүлэл, бодлогын баримт бичиг, OER-ийг төрөлжүүлэн ашигла.",
+      "C2.3": "Материалыг зөвхөн тайлбарлах бус харьцуулсан, задлан шинжилсэн байдлаар баяжуул.",
+      "C2.4": "Агуулгыг бодит кейс, асуудал, мэргэжлийн хэрэглээтэй илүү системтэй холбож өг.",
+
+      "C3.1": "Хэлэлцүүлэг, форумын даалгаврыг танин мэдэхүйн 4 үе шаттай асуултаар шаталсан байдлаар зохион байгуул.",
+      "C3.2": "Суралцагч хоорондын хариу өгөх шаардлага, чанартай оролцооны доод шалгуурыг тодорхой болго.",
+      "C3.3": "Багшийн тогтмол чиглүүлэг, асуултад хариулах, эргэх холбоо өгөх давтамжийг төлөвлө.",
+      "C3.4": "Хэлэлцүүлгийн зорилго, үнэлгээний шалгуур, оролцооны шаардлагыг илүү тодорхой болгож өг.",
+
+      "C4.1": "Бүлэг сэдэв бүрт багадаа нэг явцын үнэлгээ, богино сорил оруул.",
+      "C4.2": "Рубрик болон үнэлгээний шалгуурыг LMS дээр суралцагчдад нээлттэй байршуул.",
+      "C4.3": "Эргэх холбоог 72 цагийн дотор, сайжруулах чиглэлтэйгээр өгөх тогтолцоог бүрдүүл.",
+      "C4.4": "Өөрийн болон чацуутны үнэлгээг багшийн үнэлгээтэй хослуулж хэрэглэ.",
+
+      "C5.1": "Видео, мультимедиа агуулгыг богино, модульчилсан нэгжүүдэд хуваа.",
+      "C5.2": "Нэг дэлгэц дээрх мэдээллийн нягтралыг бууруулж, илүүдэл давхардлыг багасга.",
+      "C5.3": "Фонт, өнгө, зай, графикийн зохицлыг нэг мөр болгож, хэрэглэгч төвтэй дизайн руу шилжүүл.",
+      "C5.4": "Агуулга, үйл ажиллагаа, үнэлгээний дарааллыг энгийнээс төвөгтэй рүү логик урсгалтай болго.",
+
+      "C6.1": "Модуль бүрт зорилго, агуулга, даалгаврын бүтцийг нэгэн ижил хэв загвараар байршуул.",
+      "C6.2": "Модуль/нэгжийн төгсгөлд үнэлгээ, ахицтай дараалал, нөхцөлт нээлт ашигла.",
+      "C6.3": "Технологийн хэрэгслийг агуулга, үйл ажиллагаа, үнэлгээтэй шууд холбоотой ашигла.",
+      "C6.4": "Сабтайтл, alt text, уншихад ээлтэй өнгө, олон хэлбэрийн контент ашиглан хүртээмжийг сайжруул."
+    };
+
+    function showStatus(msg, ok=true){
+      statusBox.textContent = msg;
+      statusBox.className = `status show ${ok ? "ok" : "err"}`;
+    }
 
     function getQualityLabel(percent){
       if (percent >= 90) return "Маш өндөр чанартай";
       if (percent >= 75) return "Сайн";
       if (percent >= 60) return "Дунд";
       return "Сайжруулах шаардлагатай";
-    }
-
-    function getAiAdvice(title, percent){
-      if (percent >= 90) return `${title} маш сайн байна. Одоогийн бүтэц, хэрэгжилтийг хадгалахын зэрэгцээ жишээ, нотолгооны баримтжуулалтыг үргэлжлүүл.`;
-      if (percent >= 75) return `${title} сайн түвшинд байна. Дээд түвшинд хүргэхийн тулд илүү системтэй нотолгоо, жишээ, эргэх холбооны чанарыг нэм.`;
-      if (percent >= 60) return `${title} дунд түвшинд байна. Сул үзүүлэлтүүдийг тодруулж, логик уялдаа, идэвхтэй оролцоо, үнэлгээний ил тод байдлыг сайжруулах шаардлагатай.`;
-      return `${title} сайжруулах шаардлагатай байна. Үндсэн бүтэц, чиглүүлэг, үнэлгээ, технологийн уялдаа холбоог дахин төлөвлө.`;
     }
 
     function criterionTotal(criterion){
@@ -218,9 +355,9 @@
       return `
       <svg width="220" height="140" viewBox="0 0 220 140" aria-hidden="true">
         <path d="M20 120 A90 90 0 0 1 200 120" fill="none" stroke="#e5e7eb" stroke-width="18" stroke-linecap="round"/>
-        <path d="M20 120 A90 90 0 0 1 74 42" fill="none" stroke="#ef4444" stroke-width="18" stroke-linecap="butt"/>
-        <path d="M74 42 A90 90 0 0 1 146 42" fill="none" stroke="#f59e0b" stroke-width="18" stroke-linecap="butt"/>
-        <path d="M146 42 A90 90 0 0 1 200 120" fill="none" stroke="#16a34a" stroke-width="18" stroke-linecap="butt"/>
+        <path d="M20 120 A90 90 0 0 1 74 42" fill="none" stroke="#ef4444" stroke-width="18"/>
+        <path d="M74 42 A90 90 0 0 1 146 42" fill="none" stroke="#f59e0b" stroke-width="18"/>
+        <path d="M146 42 A90 90 0 0 1 200 120" fill="none" stroke="#16a34a" stroke-width="18"/>
         <g transform="translate(110 120)">
           <line x1="0" y1="0" x2="0" y2="-62" stroke="#666" stroke-width="5" stroke-linecap="round" transform="rotate(${angle})"/>
           <circle cx="0" cy="0" r="7" fill="#666"/>
@@ -228,6 +365,53 @@
         <text x="110" y="114" text-anchor="middle" font-size="14" fill="#64748b">Таны үнэлгээ</text>
         <text x="110" y="136" text-anchor="middle" font-size="28" font-weight="800" fill="#1f2937">${percent}%</text>
       </svg>`;
+    }
+
+    function getCriterionAiAdvice(criterion){
+      const lowIndicators = criterion.indicators
+        .map(ind => ({ ...ind, score: state.scores[ind.id] ?? 0 }))
+        .filter(ind => ind.score <= 3);
+
+      if (lowIndicators.length === 0){
+        return `${criterion.title} хэсэгт ноцтой сул үзүүлэлт ажиглагдсангүй. Одоо байгаа сайн бүтэц, нотолгоо, хэрэгжилтээ хадгалж, дараагийн шатанд системтэй баримтжуулалтаа үргэлжлүүл.`;
+      }
+
+      return lowIndicators
+        .slice(0, 2)
+        .map(ind => `• ${ind.title}: ${adviceMap[ind.id]}`)
+        .join("<br>");
+    }
+
+    function getOverallAiAdvice(){
+      const allIndicators = rubric.flatMap(c => c.indicators.map(ind => ({
+        criterionTitle: c.title,
+        indicatorId: ind.id,
+        indicatorTitle: ind.title,
+        score: state.scores[ind.id] ?? 0
+      })));
+
+      const unfilled = allIndicators.filter(x => state.scores[x.indicatorId] == null);
+      if (unfilled.length){
+        return `Нэгдсэн зөвлөмж гаргахын тулд бүх үзүүлэлтийг үнэлнэ үү. Үлдсэн үнэлгээ: ${unfilled.length}.`;
+      }
+
+      const weakest = allIndicators
+        .sort((a,b) => a.score - b.score)
+        .slice(0, 5);
+
+      const total = totalScore();
+      const percent = Math.round((total / 216) * 100);
+      const intro =
+        percent >= 90 ? "Хичээл нийт дүнгээр маш өндөр түвшинд үнэлэгдлээ. Илүү доод оноотой цөөн үзүүлэлтээ сайжруулснаар чанарыг тогтвортой хадгална."
+        : percent >= 75 ? "Хичээл нийт дүнгээр сайн түвшинд байна. Гэхдээ доорх сул үзүүлэлтүүдийг сайжруулбал илүү өндөр түвшинд хүрнэ."
+        : percent >= 60 ? "Хичээл нийт дүнгээр дунд түвшинд байна. Доорх сул үзүүлэлтүүд нь нийт чанарт хамгийн их нөлөөлж байна."
+        : "Хичээл нийт дүнгээр сайжруулах шаардлагатай түвшинд байна. Эхний ээлжид доорх сул үзүүлэлтүүдэд төвлөрөх нь зүйтэй.";
+
+      const items = weakest.map(x => {
+        return `<li><strong>${x.criterionTitle} — ${x.indicatorTitle}</strong>: ${adviceMap[x.indicatorId]}</li>`;
+      }).join("");
+
+      return `<div>${intro}</div><ul>${items}</ul>`;
     }
 
     function renderDashboard(){
@@ -243,9 +427,8 @@
           <div class="gauge-wrap">${gaugeSVG(percent)}</div>
           <div class="ai-box">
             <div class="ai-title">AI зөвлөмж</div>
-            <div class="ai-text">${getAiAdvice(criterion.title, percent)}</div>
-          </div>
-        `;
+            <div class="ai-text">${getCriterionAiAdvice(criterion)}</div>
+          </div>`;
         dashboardEl.appendChild(card);
       });
     }
@@ -254,11 +437,20 @@
       const total = totalScore();
       const max = 216;
       const percent = Math.round((total / max) * 100);
+
       totalScoreEl.textContent = total;
       totalPercentEl.textContent = percent + "%";
       qualityLabelEl.textContent = getQualityLabel(percent);
-      qualityLabelEl.style.background = percent >= 90 ? "#eaf8f0" : percent >= 75 ? "#eef4ff" : percent >= 60 ? "#fff7e8" : "#fff0f0";
-      qualityLabelEl.style.color = percent >= 90 ? "#0f9d58" : percent >= 75 ? "#315efb" : percent >= 60 ? "#b7791f" : "#c0392b";
+
+      qualityLabelEl.style.background =
+        percent >= 90 ? "#eaf8f0" :
+        percent >= 75 ? "#eef4ff" :
+        percent >= 60 ? "#fff7e8" : "#fff0f0";
+
+      qualityLabelEl.style.color =
+        percent >= 90 ? "#0f9d58" :
+        percent >= 75 ? "#315efb" :
+        percent >= 60 ? "#b7791f" : "#c0392b";
 
       barsEl.innerHTML = "";
       rubric.forEach(criterion => {
@@ -272,6 +464,8 @@
           <div style="font-size:12px;color:#667085;margin-top:6px;">${criterion.title}</div>`;
         barsEl.appendChild(box);
       });
+
+      overallAiTextEl.innerHTML = getOverallAiAdvice();
       renderDashboard();
     }
 
@@ -280,79 +474,184 @@
       rubric.forEach(criterion => {
         const card = document.createElement("div");
         card.className = "card";
+
         const head = document.createElement("div");
         head.className = "criterion-head";
         head.innerHTML = `
-          <div><div style="font-size:12px;font-weight:800;color:#5b6880;margin-bottom:6px;">${criterion.id}</div><h2 class="criterion-title">${criterion.title}</h2></div>
+          <div>
+            <div style="font-size:12px;font-weight:800;color:#5b6880;margin-bottom:6px;">${criterion.id}</div>
+            <h2 class="criterion-title">${criterion.title}</h2>
+          </div>
           <div class="score-pill">Оноо: ${criterionTotal(criterion)} / ${criterion.max}</div>`;
         card.appendChild(head);
+
         criterion.indicators.forEach(indicator => {
           const section = document.createElement("div");
           section.className = "indicator";
           section.innerHTML = `
             <div class="indicator-top">
-              <div><div class="indicator-code">${indicator.id}</div><h3 class="indicator-title">${indicator.title}</h3></div>
+              <div>
+                <div class="indicator-code">${indicator.id}</div>
+                <h3 class="indicator-title">${indicator.title}</h3>
+              </div>
               <div class="indicator-value">Сонгосон оноо: <strong>${state.scores[indicator.id] ?? "—"}</strong></div>
             </div>`;
+
           const levels = document.createElement("div");
           levels.className = "levels";
+
           indicator.levels.forEach(level => {
             const btn = document.createElement("div");
             btn.className = "level" + (state.scores[indicator.id] === level.score ? " active" : "");
             btn.innerHTML = `
-              <div class="level-head"><span class="level-tag">Түвшин ${level.label}</span><span class="level-score">${level.score} оноо</span></div>
+              <div class="level-head">
+                <span class="level-tag">Түвшин ${level.label}</span>
+                <span class="level-score">${level.score} оноо</span>
+              </div>
               <div class="level-text">${level.text}</div>`;
+
             btn.addEventListener("click", () => {
               state.scores[indicator.id] = level.score;
               renderCriteria();
               renderSummary();
             });
+
             levels.appendChild(btn);
           });
+
           section.appendChild(levels);
           card.appendChild(section);
         });
+
         criteriaEl.appendChild(card);
       });
     }
 
-    function resetAll(){
-      state.scores = {};
-      document.getElementById("courseName").value = "";
-      document.getElementById("courseCode").value = "";
-      document.getElementById("evaluator").value = "";
-      document.getElementById("notes").value = "";
-      document.getElementById("evalDate").value = "";
-      renderCriteria();
-      renderSummary();
-    }
+    function getPayload(){
+      const total = totalScore();
+      const max = 216;
+      const percent = Math.round((total/max)*100);
 
-    function exportJSON(){
-      const payload = {
+      return {
         courseName: document.getElementById("courseName").value,
         courseCode: document.getElementById("courseCode").value,
         evaluator: document.getElementById("evaluator").value,
         evalDate: document.getElementById("evalDate").value,
         notes: document.getElementById("notes").value,
-        totalScore: totalScore(),
-        maxScore: 216,
-        percent: Math.round((totalScore()/216) * 100),
-        quality: getQualityLabel(Math.round((totalScore()/216) * 100)),
-        criterionTotals: rubric.map(c => ({ id:c.id, title:c.title, score:criterionTotal(c), max:c.max })),
+        totalScore: total,
+        maxScore: max,
+        percent,
+        quality: getQualityLabel(percent),
+        overallAiAdvice: overallAiTextEl.innerText,
+        criterionTotals: Object.fromEntries(rubric.map(c => [c.id, criterionTotal(c)])),
+        criterionPercents: Object.fromEntries(rubric.map(c => [c.id, Math.round((criterionTotal(c)/c.max)*100)])),
         scores: state.scores,
         exportedAt: new Date().toISOString()
       };
-      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+    }
+
+    function flattenPayload(payload){
+      const base = {
+        courseName: payload.courseName,
+        courseCode: payload.courseCode,
+        evaluator: payload.evaluator,
+        evalDate: payload.evalDate,
+        totalScore: payload.totalScore,
+        maxScore: payload.maxScore,
+        percent: payload.percent,
+        quality: payload.quality,
+        overallAiAdvice: payload.overallAiAdvice,
+        notes: payload.notes,
+        exportedAt: payload.exportedAt,
+      };
+
+      rubric.forEach(c => {
+        base[`${c.id}_title`] = c.title;
+        base[`${c.id}_score`] = payload.criterionTotals[c.id];
+        base[`${c.id}_percent`] = payload.criterionPercents[c.id];
+      });
+
+      Object.entries(payload.scores).forEach(([k,v]) => base[k] = v ?? "");
+      return base;
+    }
+
+    function toCSVRow(obj, headers){
+      return headers.map(h => {
+        const value = obj[h] ?? "";
+        const text = String(value).replace(/"/g,'""');
+        return `"${text}"`;
+      }).join(",");
+    }
+
+    function downloadExcelCSV(){
+      const payload = getPayload();
+      const row = flattenPayload(payload);
+      const headers = Object.keys(row);
+      const headerObj = Object.fromEntries(headers.map(h => [h,h]));
+      const csv = "\uFEFF" + [toCSVRow(headerObj, headers), toCSVRow(row, headers)].join("\n");
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `nn-rubric-${payload.courseCode || 'course'}.json`;
+      a.download = `${payload.courseCode || 'nn-rubric'}-${payload.evaluator || 'evaluation'}.csv`;
       a.click();
       URL.revokeObjectURL(url);
+
+      showStatus("Excel-д нээж болох CSV файл татагдлаа.", true);
+    }
+
+    async function submitEvaluation(){
+      const payload = getPayload();
+      const url = document.getElementById("sheetUrl").value.trim();
+
+      if (!payload.courseName || !payload.courseCode || !payload.evaluator) {
+        showStatus("Хичээлийн нэр, код, үнэлэгчийн нэрийг бүрэн оруулна уу.", false);
+        return;
+      }
+
+      const unscored = rubric.flatMap(c => c.indicators).filter(i => state.scores[i.id] == null);
+      if (unscored.length) {
+        showStatus(`Бүх үзүүлэлтийг үнэлнэ үү. Үлдсэн: ${unscored.length}`, false);
+        return;
+      }
+
+      if (!url) {
+        downloadExcelCSV();
+        return;
+      }
+
+      try {
+        const res = await fetch(url, {
+          method: "POST",
+          mode: "cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(flattenPayload(payload))
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        showStatus("Үнэлгээ Google Sheet-д амжилттай хадгалагдлаа.", true);
+      } catch (err) {
+        showStatus("Google Sheet рүү хадгалах үед алдаа гарлаа. Web App URL болон permission-аа шалгана уу.", false);
+        console.error(err);
+      }
+    }
+
+    function resetAll(){
+      state.scores = {};
+      ["courseName","courseCode","evaluator","notes","evalDate","sheetUrl"].forEach(id => {
+        document.getElementById(id).value = "";
+      });
+      statusBox.className = "status";
+      statusBox.textContent = "";
+      renderCriteria();
+      renderSummary();
     }
 
     document.getElementById("resetBtn").addEventListener("click", resetAll);
-    document.getElementById("exportBtn").addEventListener("click", exportJSON);
+    document.getElementById("excelBtn").addEventListener("click", downloadExcelCSV);
+    document.getElementById("submitBtn").addEventListener("click", submitEvaluation);
+
     renderCriteria();
     renderSummary();
   </script>
