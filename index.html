@@ -201,9 +201,7 @@
         <div class="field"><label>Хичээлийн код</label><input id="courseCode" placeholder="Жишээ: M.IT203" /></div>
         <div class="field"><label>Үнэлэгчийн нэр</label><input id="evaluator" placeholder="Жишээ: Эксперт 1" /></div>
         <div class="field"><label>Огноо</label><input id="evalDate" type="date" /></div>
-   <script>
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbycldPQYZbM5XMzklqLuHGl-fXdwOC0cOZmretZCHchG7UBZrxgNgUOpyUl_KKfTQBC/exec";
-</script>
+ 
        <button onclick="evaluate()">Үнэлэх</button>
         <button class="btn btn-primary" id="excelBtn">Excel татах</button>
         <button class="btn btn-ghost" id="resetBtn">Цэвэрлэх</button>
@@ -306,6 +304,8 @@ let totalScore = 0;
 let percent = 0;
 let performanceLabel = "";
 let scores = {};
+ 
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbycldPQYZbM5XMzklqLuHGl-fXdwOC0cOZmretZCHchG7UBZrxgNgUOpyUl_KKfTQBC/exec";
 
     const adviceMap = {
       "C1.1": "CLO-г хэмжигдэхүйц үйл үгтэйгээр дахин томьёолж, Блумийн түвшнийг илүү тодорхой болго.",
@@ -628,21 +628,17 @@ let scores = {};
   }
 }
 async function evaluate() {
-  const payload = {
-    courseName,
-    courseCode,
-    evaluator,
-    totalScore,
-    percent,
-    level: performanceLabel,
-    ...scores
-  };
+  const payload = getPayload(); 
 
+  await submitToGoogleSheet(payload);
+
+  showStatus("Амжилттай хадгалагдлаа!", true);
+}
   await submitToGoogleSheet(payload);
 }
     function resetAll(){
       state.scores = {};
-      ["courseName","courseCode","evaluator","notes","evalDate","sheetUrl"].forEach(id => {
+      ["courseName","courseCode","evaluator","notes","evalDate"].forEach(id => {
         document.getElementById(id).value = "";
       });
       statusBox.className = "status";
@@ -653,7 +649,7 @@ async function evaluate() {
 
     document.getElementById("resetBtn").addEventListener("click", resetAll);
     document.getElementById("excelBtn").addEventListener("click", downloadExcelCSV);
-    document.getElementById("submitBtn").addEventListener("click", submitEvaluation);
+
 
     renderCriteria();
     renderSummary();
