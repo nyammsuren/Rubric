@@ -204,7 +204,7 @@
    <script>
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbycldPQYZbM5XMzklqLuHGl-fXdwOC0cOZmretZCHchG7UBZrxgNgUOpyUl_KKfTQBC/exec";
 </script>
-        <button class="btn btn-success" id="submitBtn">Үнэлэх</button>
+       <button onclick="evaluate()">Үнэлэх</button>
         <button class="btn btn-primary" id="excelBtn">Excel татах</button>
         <button class="btn btn-ghost" id="resetBtn">Цэвэрлэх</button>
       </div>
@@ -299,6 +299,13 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbycldPQYZbM5X
     const qualityLabelEl = document.getElementById("qualityLabel");
     const overallAiTextEl = document.getElementById("overallAiText");
     const statusBox = document.getElementById("statusBox");
+    let courseName = "";
+let courseCode = "";
+let evaluator = "";
+let totalScore = 0;
+let percent = 0;
+let performanceLabel = "";
+let scores = {};
 
     const adviceMap = {
       "C1.1": "CLO-г хэмжигдэхүйц үйл үгтэйгээр дахин томьёолж, Блумийн түвшнийг илүү тодорхой болго.",
@@ -603,42 +610,36 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbycldPQYZbM5X
       showStatus("Excel-д нээж болох CSV файл татагдлаа.", true);
     }
 
-    async function submitEvaluation(){
-      const payload = getPayload();
-      const url = document.getElementById("sheetUrl").value.trim();
+  async function submitToGoogleSheet(payload) {
+  try {
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
 
-      if (!payload.courseName || !payload.courseCode || !payload.evaluator) {
-        showStatus("Хичээлийн нэр, код, үнэлэгчийн нэрийг бүрэн оруулна уу.", false);
-        return;
-      }
+    alert("Амжилттай хадгалагдлаа!");
+  } catch (error) {
+    alert("Алдаа гарлаа!");
+    console.error(error);
+  }
+}
+async function evaluate() {
+  const payload = {
+    courseName,
+    courseCode,
+    evaluator,
+    totalScore,
+    percent,
+    level: performanceLabel,
+    ...scores
+  };
 
-      const unscored = rubric.flatMap(c => c.indicators).filter(i => state.scores[i.id] == null);
-      if (unscored.length) {
-        showStatus(`Бүх үзүүлэлтийг үнэлнэ үү. Үлдсэн: ${unscored.length}`, false);
-        return;
-      }
-
-      if (!url) {
-        downloadExcelCSV();
-        return;
-      }
-
-      try {
-        const res = await fetch(url, {
-          method: "POST",
-          mode: "cors",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify(flattenPayload(payload))
-        });
-
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        showStatus("Үнэлгээ Google Sheet-д амжилттай хадгалагдлаа.", true);
-      } catch (err) {
-        showStatus("Google Sheet рүү хадгалах үед алдаа гарлаа. Web App URL болон permission-аа шалгана уу.", false);
-        console.error(err);
-      }
-    }
-
+  await submitToGoogleSheet(payload);
+}
     function resetAll(){
       state.scores = {};
       ["courseName","courseCode","evaluator","notes","evalDate","sheetUrl"].forEach(id => {
