@@ -201,7 +201,7 @@
         <div class="field"><label>Хичээлийн код</label><input id="courseCode" placeholder="Жишээ: M.IT203" /></div>
         <div class="field"><label>Үнэлэгчийн нэр</label><input id="evaluator" placeholder="Жишээ: Эксперт 1" /></div>
         <div class="field"><label>Огноо</label><input id="evalDate" type="date" /></div>
-        <button class="btn btn-success" onclick="evaluate()">Үнэлэх</button>
+        <button class="btn btn-success" onclick="sevaluate()">Үнэлэх</button>
         <button class="btn btn-primary" id="excelBtn">Excel татах</button>
         <button class="btn btn-ghost" id="resetBtn">Цэвэрлэх</button>
       </div>
@@ -609,7 +609,7 @@
       }
     }
 
-    async function evaluate() {
+    async function sevaluate() {
       const payload = getPayload();
 
       if (!payload.courseName || !payload.courseCode || !payload.evaluator) {
@@ -640,6 +640,7 @@
 
     document.getElementById("resetBtn").addEventListener("click", resetAll);
     document.getElementById("excelBtn").addEventListener("click", downloadExcelCSV);
+    document.getElementById("submitBtn").addEventListener("click", sevaluate);
 
     renderCriteria();
     renderSummary();
