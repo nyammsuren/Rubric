@@ -18,7 +18,7 @@
         {
           id: "C1",
           title: "Сургалтын зорилго, үр дүн, үнэлгээний уялдаа",
-          max: 72,
+          max: 36,
           indicators: [
             {
               id: "C1.1",
@@ -65,7 +65,7 @@
         {
           id: "C2",
           title: "Агуулгын чанар",
-          max: 72,
+          max: 36,
           indicators: [
             {
               id: "C2.1",
@@ -112,7 +112,7 @@
         {
           id: "C3",
           title: "Сургалтын дизайн ба мультимедиа",
-          max: 72,
+          max: ,
           indicators: [
             {
               id: "C3.1",
@@ -159,7 +159,7 @@
         {
           id: "C4",
           title: "Онлайн харилцаа ба оролцоо",
-          max: 72,
+          max: ,
           indicators: [
             {
               id: "C4.1",
@@ -206,7 +206,7 @@
         {
           id: "C5",
           title: "Үнэлгээ ба эргэх холбоо",
-          max: 72,
+          max: ,
           indicators: [
             {
               id: "C5.1",
@@ -234,7 +234,7 @@
               levels: [
                 { score: 0, label: "1", text: "Эргэх холбоо байхгүй" },
                 { score: 3, label: "2", text: "Эргэх холбоотой боловч хоцрогдсон эсвэл ерөнхий" },
-                { score: 6, label: "3", text: "Даалгаврын дараа ихдээ 72 цагийн дотор эргэх холбоо өгсөн" },
+                { score: 6, label: "3", text: "Даалгаврын дараа ихдээ  цагийн дотор эргэх холбоо өгсөн" },
                 { score: 9, label: "4", text: "Суралцагчийн цаашдын хөгжлийг чиглүүлсэн, сайжруулах арга санал болгосон, дахин гүйцэтгэх боломж олгосон" },
               ],
             },
@@ -253,7 +253,7 @@
         {
           id: "C6",
           title: "Технологийн интеграц ба сургалтын орчин",
-          max: 72,
+          max: ,
           indicators: [
             {
               id: "C6.1",
@@ -373,7 +373,7 @@
                   <p className="mt-2 text-sm text-slate-600">
                     Нийт дээд оноо: <span className="font-semibold">{maxScore}</span>. Гүйцэтгэлийн хувь = (авсан оноо / {maxScore}) × 100.
                   </p>
-                  <p className="mt-1 text-sm text-slate-600">Шалгуур бүрийг ижил жинтэй гэж үзэж, шалгуур тус бүрийн дээд оноог 72 байхаар тогтоов.</p>
+                  <p className="mt-1 text-sm text-slate-600">Шалгуур бүрийг ижил жинтэй гэж үзэж, шалгуур тус бүрийн дээд оноог  байхаар тогтоов.</p>
                 </div>
                 <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
                   <div className="rounded-2xl bg-slate-100 p-4 text-center">
@@ -410,14 +410,7 @@
                     placeholder="Жишээ: Эксперт 1"
                   />
                 </div>
-                <div className="flex items-end gap-2">
-                  <button onClick={exportJSON} className="w-full rounded-xl bg-slate-900 px-4 py-2 font-medium text-white hover:bg-slate-800">
-                    JSON татах
-                  </button>
-                  <button onClick={resetAll} className="rounded-xl border border-slate-300 px-4 py-2 font-medium text-slate-700 hover:bg-slate-100">
-                    Цэвэрлэх
-                  </button>
-                </div>
+                
               </div>
 
               <div className="mt-4">
