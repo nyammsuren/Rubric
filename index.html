@@ -193,13 +193,13 @@
   <div class="wrap">
     <section class="hero">
       <h1>Онлайн сургалтыг үнэлэх НН шалгуур</h1>
-      <p>GitHub Pages дээр шууд ажиллах интерактив үнэлгээний хэрэгсэл</p>
+      <p>Онлайн сургалтыг үнэлэх интерактив үнэлгээний хэрэгсэл</p>
       <p>Нийт дээд оноо: <strong>216</strong> | Шалгуур тус бүрийн дээд оноо: <strong>36</strong></p>
 
       <div class="meta">
         <div class="field"><label>Хичээлийн нэр</label><input id="courseName" placeholder="Жишээ: Компьютерийн сүлжээ" /></div>
         <div class="field"><label>Хичээлийн код</label><input id="courseCode" placeholder="Жишээ: M.IT203" /></div>
-        <div class="field"><label>Үнэлэгчийн нэр</label><input id="evaluator" placeholder="Жишээ: Эксперт 1" /></div>
+        <div class="field"><label>Үнэлгээ хийх багшийн нэр</label><input id="evaluator" placeholder="Жишээ: Эксперт 1" /></div>
         <div class="field"><label>Огноо</label><input id="evalDate" type="date" /></div>
     <button class="btn btn-success" id="submitBtn">Үнэлэх</button>
         <button class="btn btn-primary" id="excelBtn">Excel татах</button>
@@ -225,14 +225,14 @@
           <div class="legend">
             <div><strong>Тайлбарлах босго</strong></div>
             <div>90–100% → Маш өндөр чанартай</div>
-            <div>75–89% → Сайн</div>
-            <div>60–74% → Дунд</div>
+            <div>75–89% → Бага зэргийн засвар хэрэгтэй </div>
+            <div>60–74% → Дунд зэргийн засвар хийх шаардлагатай</div>
             <div>&lt;60% → Сайжруулах шаардлагатай</div>
           </div>
         </div>
 
         <div class="card overall-ai">
-          <h3 style="margin:0 0 10px;font-size:22px;">Нэгдсэн AI зөвлөмж</h3>
+          <h3 style="margin:0 0 10px;font-size:22px;">Нэгдсэн зөвлөмж</h3>
           <div id="overallAiText" style="font-size:14px;line-height:1.65;color:#334155;">
             Үнэлгээ хийж эхэлмэгц нэгдсэн зөвлөмж энд гарна.
           </div>
@@ -333,8 +333,8 @@
 
     function getQualityLabel(percent){
       if (percent >= 90) return "Маш өндөр чанартай";
-      if (percent >= 75) return "Сайн";
-      if (percent >= 60) return "Дунд";
+      if (percent >= 75) return "Бага зэргийн засвар хэрэгтэй";
+      if (percent >= 60) return "Дунд зэргийн засвар хийх шаардлагатай";
       return "Сайжруулах шаардлагатай";
     }
 
@@ -613,7 +613,7 @@
   const payload = getPayload();
 
   if (!payload.courseName || !payload.courseCode || !payload.evaluator) {
-    showStatus("Хичээлийн нэр, код, үнэлэгчийн нэрийг бүрэн оруулна уу.", false);
+    showStatus("Хичээлийн нэр, код, үнэлгээ хийж буй багшийн нэрийг бүрэн оруулна уу.", false);
     return;
   }
 
