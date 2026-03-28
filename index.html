@@ -428,7 +428,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dashboardEl.appendChild(card);
 
     new Chart(document.getElementById(canvasId), {
-      type: 'gauge',
+      type: 'radar',
       data: {
         datasets: [{
           data: [percent, 100 - percent],
