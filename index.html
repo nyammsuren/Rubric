@@ -415,7 +415,7 @@
     }
 
     function renderRadarChart(){
-      const labels = rubric.map(c => c.id.replace(".Шалгуур ", ""));
+           const labels = rubric.map(c => c.title);
       const data = rubric.map(c => criterionTotal(c));
 
       if (radarChart) {
