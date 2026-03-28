@@ -219,8 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
       
     </section>
 
-    <section class="dashboard" id="dashboard"></section>
-
+ 
     <section class="layout">
       <div class="criteria" id="criteria"></div>
 
@@ -258,6 +257,8 @@ document.addEventListener("DOMContentLoaded", function () {
         <button class="btn btn-primary" id="excelBtn">Excel татах</button>
       </aside>
     </section>
+       <section class="dashboard" id="dashboard"></section>
+
   </div>
 
   <script>
@@ -646,10 +647,7 @@ document.addEventListener("DOMContentLoaded", function () {
    
 const submitBtn = document.getElementById("submitBtn");
 if (submitBtn) submitBtn.addEventListener("click", submitEvaluation);
-    
-    document.getElementById("excelBtn").addEventListener("click", downloadExcelCSV);
-
-
+        document.getElementById("excelBtn").addEventListener("click", downloadExcelCSV);
     renderCriteria();
     renderSummary();
   </script>
