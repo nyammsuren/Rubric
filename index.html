@@ -148,8 +148,11 @@
     }
     .gauge-title{font-weight:800;margin:0 0 6px;font-size:16px}
     .gauge-sub{font-size:12px;color:var(--muted);margin-bottom:8px}
-  .gauge-wrap{display:flex;align-items:center;justify-content:center;position:relative}
 
+.gauge-wrap{
+  width:100%;
+  display:block;
+}
     .ai-box{
       margin-top:10px;padding:12px 14px;border-radius:14px;background:#f8fbff;border:1px solid #dbe5ff
     }
@@ -289,8 +292,8 @@
       ]}
     ];
 
-    const state = { scores: {} };
-
+    
+Object.keys(state.scores).forEach(k => delete state.scores[k]);
     const criteriaEl = document.getElementById("criteria");
     const barsEl = document.getElementById("bars");
     const dashboardEl = document.getElementById("dashboard");
