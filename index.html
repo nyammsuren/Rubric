@@ -292,8 +292,8 @@
       ]}
     ];
 
-    
-Object.keys(state.scores).forEach(k => delete state.scores[k]);
+    state.scores = {};
+
     const criteriaEl = document.getElementById("criteria");
     const barsEl = document.getElementById("bars");
     const dashboardEl = document.getElementById("dashboard");
