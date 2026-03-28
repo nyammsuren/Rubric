@@ -235,9 +235,10 @@
 
         <div class="card overall-ai">
           <h3 style="margin:0 0 10px;font-size:22px;">Нэгдсэн зөвлөмж</h3>
-          <div id="overallAiText" style="font-size:14px;line-height:1.65;color:#334155;">
-            Үнэлгээ хийж эхэлмэгц нэгдсэн зөвлөмж энд гарна.
-          </div>
+       <textarea id="overallAiText"
+  style="width:100%;min-height:140px;border:1px solid #e6ebf3;
+  border-radius:16px;padding:12px 14px;font-size:14px;line-height:1.6;">
+</textarea>
         </div>
 
        
@@ -515,7 +516,7 @@
         barsEl.appendChild(box);
       });
 
-      overallAiTextEl.innerHTML = getOverallAiAdvice();
+      overallAiTextEl.value = getOverallAiAdvice();
       renderRadarChart();
     }
 
@@ -592,7 +593,7 @@
         maxScore: max,
         percent,
         quality: getQualityLabel(percent),
-        overallAiAdvice: overallAiTextEl.innerText,
+        overallAiAdvice: overallAiTextEl.value,
         criterionTotals: Object.fromEntries(rubric.map(c => [c.id, criterionTotal(c)])),
         criterionPercents: Object.fromEntries(rubric.map(c => [c.id, Math.round((criterionTotal(c)/c.max)*100)])),
         scores: state.scores,
