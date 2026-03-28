@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Онлайн сургалтыг үнэлэх НН шалгуур</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <textarea id="overallAiText"
+  style="
+    width:100%;
+    min-height:220px;
+    border:1px solid #e6ebf3;
+    border-radius:16px;
+    padding:14px;
+    font-size:14px;
+    line-height:1.7;
+    resize:vertical;
+  ">
+</textarea>
   <style>
     :root{
       --bg:#f6f8fc;
@@ -405,7 +417,12 @@
         return `<li><strong>${x.criterionTitle} — ${x.indicatorTitle}</strong>: ${adviceMap[x.indicatorId]}</li>`;
       }).join("");
 
-      return `<div>${intro}</div><ul>${items}</ul>`;
+return `${intro}
+
+${weakest.map((x, i) => 
+`${i+1}. ${x.criterionTitle} — ${x.indicatorTitle}
+→ ${adviceMap[x.indicatorId]}`
+).join("\n\n")}`;
     }
 
     function renderRadarChart(){
@@ -690,6 +707,10 @@
 
     renderCriteria();
     renderSummary();
+    overallAiTextEl.addEventListener("input", function(){
+  this.style.height = "auto";
+  this.style.height = this.scrollHeight + "px";
+});
   </script>
 </body>
 </html>
