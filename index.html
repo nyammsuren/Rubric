@@ -423,23 +423,25 @@ function progressBar(percent){
     }
 
     function renderDashboard(){
-      dashboardEl.innerHTML = "";
-      rubric.forEach(criterion => {
-        const score = criterionTotal(criterion);
-        const percent = Math.round((score/criterion.max)*100);
-        const card = document.createElement("div");
-        card.className = "gauge-card";
-        card.innerHTML = `
-          <div class="gauge-title">${criterion.title}</div>
-          <div class="gauge-sub">${score}/${criterion.max} — Таны үнэлгээ</div>
-          <div class="gauge-wrap">${gaugeSVG(percent)}</div>
-          <div class="ai-box">
-            <div class="ai-title">AI зөвлөмж</div>
-            <div class="ai-text">${getCriterionAiAdvice(criterion)}</div>
-          </div>`;
-        dashboardEl.appendChild(card);
-      });
-    }
+  dashboardEl.innerHTML = "";
+  rubric.forEach(criterion => {
+    const score = criterionTotal(criterion);
+    const percent = Math.round((score / criterion.max) * 100);
+
+    const card = document.createElement("div");
+    card.className = "gauge-card";
+    card.innerHTML = `
+      <div class="gauge-title">${criterion.title}</div>
+      <div class="gauge-sub">${score}/${criterion.max} — Таны үнэлгээ</div>
+      <div class="gauge-wrap">${progressBar(percent)}</div>
+      <div class="ai-box">
+        <div class="ai-title">AI зөвлөмж</div>
+        <div class="ai-text">${getCriterionAiAdvice(criterion)}</div>
+      </div>
+    `;
+    dashboardEl.appendChild(card);
+  });
+}
 
     function renderSummary(){
       const total = totalScore();
