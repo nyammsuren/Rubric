@@ -201,8 +201,7 @@
         <div class="field"><label>Хичээлийн код</label><input id="courseCode" placeholder="Жишээ: M.IT203" /></div>
         <div class="field"><label>Үнэлгээ хийх багшийн нэр</label><input id="evaluator" placeholder="Жишээ: Эксперт 1" /></div>
         <div class="field"><label>Огноо</label><input id="evalDate" type="date" /></div>
-    <button class="btn btn-success" id="submitBtn">Үнэлэх</button>
-        <button class="btn btn-primary" id="excelBtn">Excel татах</button>
+   
         <button class="btn btn-ghost" id="resetBtn">Цэвэрлэх</button>
       </div>
       <div id="statusBox" class="status" style="margin-top:12px;"></div>
@@ -223,8 +222,8 @@
           <div class="quality" id="qualityLabel">Сайжруулах шаардлагатай</div>
           <div class="bars" id="bars"></div>
           <div class="legend">
-            <div><strong>Тайлбарлах босго</strong></div>
-            <div>90–100% → Маш өндөр чанартай</div>
+            <div><strong>Тайлбар</strong></div>
+            <div>90–100% → Жишиг хичээл</div>
             <div>75–89% → Бага зэргийн засвар хэрэгтэй </div>
             <div>60–74% → Дунд зэргийн засвар хийх шаардлагатай</div>
             <div>&lt;60% → Сайжруулах шаардлагатай</div>
@@ -242,6 +241,8 @@
           <label for="notes" style="display:block;font-weight:800;margin-bottom:10px;">Тэмдэглэл</label>
           <textarea id="notes" placeholder="Нэмэлт ажиглалт, тайлбар"></textarea>
         </div>
+         <button class="btn btn-success" id="submitBtn">Үнэлэх</button>
+        <button class="btn btn-primary" id="excelBtn">Excel татах</button>
       </aside>
     </section>
   </div>
