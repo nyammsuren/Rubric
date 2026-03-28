@@ -200,8 +200,20 @@
         <div class="field"><label>Хичээлийн нэр</label><input id="courseName" placeholder="Жишээ: Компьютерийн сүлжээ" /></div>
         <div class="field"><label>Хичээлийн код</label><input id="courseCode" placeholder="Жишээ: M.IT203" /></div>
         <div class="field"><label>Үнэлгээ хийх багшийн нэр</label><input id="evaluator" placeholder="Жишээ: Эксперт 1" /></div>
-        <div class="field"><label>Огноо</label><input id="evalDate" type="date" /></div>
-   
+      
+   <div class="field">
+  <label>Огноо</label>
+  <input id="evalDate" type="date" readonly />
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const today = new Date().toISOString().split('T')[0];
+  const dateInput = document.getElementById('evalDate');
+  
+  dateInput.value = today;
+});
+</script>
       
       </div>
       
