@@ -428,7 +428,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dashboardEl.appendChild(card);
 
     new Chart(document.getElementById(canvasId), {
-      type: 'doughnut',
+      type: 'gauge',
       data: {
         datasets: [{
           data: [percent, 100 - percent],
