@@ -35,7 +35,7 @@
     .hero p{margin:6px 0;color:rgba(255,255,255,.92)}
     .meta{
       display:grid;
-      grid-template-columns:1.1fr 1fr 1fr 1fr auto auto auto;
+      grid-template-columns:1.1fr 1fr 1fr 1fr;
       gap:12px;margin-top:18px
     }
     .field{
@@ -55,7 +55,6 @@
       font-weight:800;transition:.2s ease;white-space:nowrap
     }
     .btn-primary{background:#fff;color:#2242bb}
-    .btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.22)}
     .btn-success{background:#0f9d58;color:#fff}
     .btn:hover{transform:translateY(-1px)}
 
@@ -143,19 +142,6 @@
       padding:12px 14px;font:inherit;resize:vertical;outline:none
     }
 
-    .dashboard{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:16px}
-    .gauge-card{
-      background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow)
-    }
-    .gauge-title{font-weight:800;margin:0 0 6px;font-size:16px}
-    .gauge-sub{font-size:12px;color:var(--muted);margin-bottom:8px}
-
-    .ai-box{
-      margin-top:10px;padding:12px 14px;border-radius:14px;background:#f8fbff;border:1px solid #dbe5ff
-    }
-    .ai-title{font-size:12px;font-weight:800;color:#315efb;margin-bottom:6px}
-    .ai-text{font-size:13px;line-height:1.6;color:#334155}
-
     .overall-ai{padding:18px 20px}
     .overall-ai ul{margin:8px 0 0 18px;padding:0}
     .overall-ai li{margin:6px 0;line-height:1.55}
@@ -168,15 +154,21 @@
     .status.ok{color:#0f9d58;background:#eefcf4;border-color:#c9efd7}
     .status.err{color:#b42318;background:#fff4f2;border-color:#f6d0ca}
 
+    .radar-card{
+      margin-top:24px;
+      padding:20px;
+    }
+    .radar-wrap{
+      max-width:780px;
+      margin:0 auto;
+    }
+
     @media (max-width: 1280px){
       .layout{grid-template-columns:1fr}
       .side{position:static}
-      .dashboard{grid-template-columns:1fr 1fr 1fr}
-      .meta{grid-template-columns:1fr 1fr 1fr 1fr}
     }
     @media (max-width: 900px){
       .meta{grid-template-columns:1fr 1fr}
-      .dashboard{grid-template-columns:1fr 1fr}
     }
     @media (max-width: 700px){
       .wrap{padding:14px}
@@ -186,7 +178,6 @@
       .meta{grid-template-columns:1fr}
       .criterion-head{flex-direction:column;align-items:flex-start}
       .big-score{grid-template-columns:1fr}
-      .dashboard{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -198,29 +189,25 @@
       <p>Нийт дээд оноо: <strong>72</strong> | Шалгуур тус бүрийн дээд оноо: <strong>12</strong></p>
 
       <div class="meta">
-        <div class="field"><label>Хичээлийн нэр</label><input id="courseName" placeholder="Жишээ: Компьютерийн сүлжээ" /></div>
-        <div class="field"><label>Хичээлийн код</label><input id="courseCode" placeholder="Жишээ: M.IT203" /></div>
-        <div class="field"><label>Үнэлгээ хийх багшийн нэр</label><input id="evaluator" placeholder="Жишээ: Эксперт 1" /></div>
-      
-   <div class="field">
-  <label>Огноо</label>
-  <input id="evalDate" type="date" readonly />
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const today = new Date().toISOString().split('T')[0];
-  const dateInput = document.getElementById('evalDate');
-  
-  dateInput.value = today;
-});
-</script>
-      
+        <div class="field">
+          <label>Хичээлийн нэр</label>
+          <input id="courseName" placeholder="Жишээ: Компьютерийн сүлжээ" />
+        </div>
+        <div class="field">
+          <label>Хичээлийн код</label>
+          <input id="courseCode" placeholder="Жишээ: M.IT203" />
+        </div>
+        <div class="field">
+          <label>Үнэлгээ хийх багшийн нэр</label>
+          <input id="evaluator" placeholder="Жишээ: Эксперт 1" />
+        </div>
+        <div class="field">
+          <label>Огноо</label>
+          <input id="evalDate" type="date" readonly />
+        </div>
       </div>
-      
     </section>
 
- 
     <section class="layout">
       <div class="criteria" id="criteria"></div>
 
@@ -228,15 +215,23 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="card summary">
           <h3>Нэгтгэл</h3>
           <div class="big-score">
-            <div class="stat"><div class="label">Нийт оноо</div><div class="value" id="totalScore">0</div></div>
-            <div class="stat"><div class="label">Хувь</div><div class="value" id="totalPercent">0%</div></div>
+            <div class="stat">
+              <div class="label">Нийт оноо</div>
+              <div class="value" id="totalScore">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Хувь</div>
+              <div class="value" id="totalPercent">0%</div>
+            </div>
           </div>
+
           <div class="quality" id="qualityLabel">Сайжруулах шаардлагатай</div>
           <div class="bars" id="bars"></div>
+
           <div class="legend">
             <div><strong>Тайлбар</strong></div>
             <div>90–100% → Жишиг хичээл</div>
-            <div>75–89% → Бага зэргийн засвар хэрэгтэй </div>
+            <div>75–89% → Бага зэргийн засвар хэрэгтэй</div>
             <div>60–74% → Дунд зэргийн засвар хийх шаардлагатай</div>
             <div>&lt;60% → Сайжруулах шаардлагатай</div>
           </div>
@@ -253,16 +248,27 @@ document.addEventListener("DOMContentLoaded", function () {
           <label for="notes" style="display:block;font-weight:800;margin-bottom:10px;">Тэмдэглэл</label>
           <textarea id="notes" placeholder="Нэмэлт ажиглалт, тайлбар"></textarea>
         </div>
-         <button class="btn btn-success" id="submitBtn">Үнэлэх</button>
+
+        <button class="btn btn-success" id="submitBtn">Үнэлэх</button>
         <div id="statusBox" class="status" style="margin-top:12px;"></div>
         <button class="btn btn-primary" id="excelBtn">Excel татах</button>
       </aside>
     </section>
-       <section class="dashboard" id="dashboard"></section>
 
+    <section class="card radar-card">
+      <h3 style="margin:0 0 16px;font-size:22px;">Шалгуурын радар график</h3>
+      <div class="radar-wrap">
+        <canvas id="radarChart" height="120"></canvas>
+      </div>
+    </section>
   </div>
 
   <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const today = new Date().toISOString().split("T")[0];
+      document.getElementById("evalDate").value = today;
+    });
+
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbycldPQYZbM5XMzklqLuHGl-fXdwOC0cOZmretZCHchG7UBZrxgNgUOpyUl_KKfTQBC/exec";
 
     const rubric = [
@@ -308,12 +314,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const criteriaEl = document.getElementById("criteria");
     const barsEl = document.getElementById("bars");
-    const dashboardEl = document.getElementById("dashboard");
     const totalScoreEl = document.getElementById("totalScore");
     const totalPercentEl = document.getElementById("totalPercent");
     const qualityLabelEl = document.getElementById("qualityLabel");
     const overallAiTextEl = document.getElementById("overallAiText");
     const statusBox = document.getElementById("statusBox");
+    const radarCanvas = document.getElementById("radarChart");
+    let radarChart = null;
 
     const adviceMap = {
       "C1.1": "CLO-г хэмжигдэхүйц үйл үгтэйгээр дахин томьёолж, Блумийн түвшнийг илүү тодорхой болго.",
@@ -362,11 +369,10 @@ document.addEventListener("DOMContentLoaded", function () {
       return rubric.reduce((sum, criterion) => sum + criterionTotal(criterion), 0);
     }
 
-
     function getCriterionAiAdvice(criterion){
       const lowIndicators = criterion.indicators
         .map(ind => ({ ...ind, score: state.scores[ind.id] ?? 0 }))
-        .filter(ind => ind.score <= 3);
+        .filter(ind => ind.score <= 1);
 
       if (lowIndicators.length === 0){
         return `${criterion.title} хэсэгт ноцтой сул үзүүлэлт ажиглагдсангүй. Одоо байгаа сайн бүтэц, нотолгоо, хэрэгжилтээ хадгалж, дараагийн шатанд системтэй баримтжуулалтаа үргэлжлүүл.`;
@@ -383,17 +389,17 @@ document.addEventListener("DOMContentLoaded", function () {
         criterionTitle: c.title,
         indicatorId: ind.id,
         indicatorTitle: ind.title,
-        score: state.scores[ind.id] ?? 0
+        score: state.scores[ind.id] ?? null
       })));
 
-      const unfilled = allIndicators.filter(x => state.scores[x.indicatorId] == null);
+      const unfilled = allIndicators.filter(x => x.score == null);
       if (unfilled.length){
         return `Нэгдсэн зөвлөмж гаргахын тулд бүх үзүүлэлтийг үнэлнэ үү. Үлдсэн үнэлгээ: ${unfilled.length}.`;
       }
 
-      const weakest = allIndicators.sort((a,b) => a.score - b.score).slice(0, 5);
+      const weakest = [...allIndicators].sort((a,b) => a.score - b.score).slice(0, 5);
       const total = totalScore();
-      const percent = Math.round((total / 216) * 100);
+      const percent = Math.round((total / 72) * 100);
 
       const intro =
         percent >= 90 ? "Хичээл нийт дүнгээр маш өндөр түвшинд үнэлэгдлээ. Илүү доод оноотой цөөн үзүүлэлтээ сайжруулснаар чанарыг тогтвортой хадгална."
@@ -408,60 +414,82 @@ document.addEventListener("DOMContentLoaded", function () {
       return `<div>${intro}</div><ul>${items}</ul>`;
     }
 
-    function renderDashboard(){
-  dashboardEl.innerHTML = "";
+    function renderRadarChart(){
+      const labels = rubric.map(c => c.id.replace(".Шалгуур ", ""));
+      const data = rubric.map(c => criterionTotal(c));
 
-  rubric.forEach((criterion, index) => {
-    const score = criterionTotal(criterion);
-    const percent = Math.round((score/criterion.max)*100);
+      if (radarChart) {
+        radarChart.destroy();
+      }
 
-    const card = document.createElement("div");
-    card.className = "gauge-card";
-
-    const canvasId = "chart_" + index;
-
-    card.innerHTML = `
-      <div class="gauge-title">${criterion.title}</div>
-      <canvas id="${canvasId}" height="160"></canvas>
-    `;
-
-    dashboardEl.appendChild(card);
-
-    new Chart(document.getElementById(canvasId), {
-      type: 'radar',
-      data: {
-        datasets: [{
-          data: [percent, 100 - percent],
-          backgroundColor: ['#315efb', '#e5e7eb'],
-          borderWidth: 0
-        }]
-      },
-      options: {
-        cutout: '70%',
-        plugins: {
-          tooltip: { enabled: false },
-          legend: { display: false }
+      radarChart = new Chart(radarCanvas, {
+        type: "radar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Шалгуурын оноо",
+            data: data,
+            fill: true,
+            backgroundColor: "rgba(49, 94, 251, 0.18)",
+            borderColor: "#315efb",
+            borderWidth: 2,
+            pointBackgroundColor: "#315efb",
+            pointBorderColor: "#ffffff",
+            pointHoverBackgroundColor: "#ffffff",
+            pointHoverBorderColor: "#315efb",
+            pointRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                color: "#172033",
+                font: { size: 13, weight: "600" }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `${context.dataset.label}: ${context.raw}/12`;
+                }
+              }
+            }
+          },
+          scales: {
+            r: {
+              min: 0,
+              max: 12,
+              ticks: {
+                stepSize: 3,
+                backdropColor: "transparent",
+                color: "#64748b"
+              },
+              grid: {
+                color: "#dbe5f1"
+              },
+              angleLines: {
+                color: "#dbe5f1"
+              },
+              pointLabels: {
+                color: "#172033",
+                font: {
+                  size: 13,
+                  weight: "600"
+                }
+              }
+            }
+          }
         }
-      },
-      plugins: [{
-        id: 'centerText',
-        beforeDraw(chart) {
-          const {width, height} = chart;
-          const ctx = chart.ctx;
-          ctx.restore();
-          ctx.font = "bold 20px sans-serif";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText(percent + "%", width / 2, height / 2);
-          ctx.save();
-        }
-      }]
-    });
-  });
-}
+      });
+    }
+
     function renderSummary(){
       const total = totalScore();
-      const max = 216;
+      const max = 72;
       const percent = Math.round((total / max) * 100);
 
       totalScoreEl.textContent = total;
@@ -492,7 +520,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       overallAiTextEl.innerHTML = getOverallAiAdvice();
-      renderDashboard();
+      renderRadarChart();
     }
 
     function renderCriteria(){
@@ -555,7 +583,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function getPayload(){
       const total = totalScore();
-      const max = 216;
+      const max = 72;
       const percent = Math.round((total/max)*100);
 
       return {
@@ -642,26 +670,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     async function submitEvaluation() {
-  const payload = getPayload();
+      const payload = getPayload();
 
-  if (!payload.courseName || !payload.courseCode || !payload.evaluator) {
-    showStatus("Хичээлийн нэр, код, үнэлгээ хийж буй багшийн нэрийг бүрэн оруулна уу.", false);
-    return;
-  }
+      if (!payload.courseName || !payload.courseCode || !payload.evaluator) {
+        showStatus("Хичээлийн нэр, код, үнэлгээ хийж буй багшийн нэрийг бүрэн оруулна уу.", false);
+        return;
+      }
 
-  const unscored = rubric.flatMap(c => c.indicators).filter(i => state.scores[i.id] == null);
-  if (unscored.length) {
-    showStatus(`Бүх үзүүлэлтийг үнэлнэ үү. Үлдсэн: ${unscored.length}`, false);
-    return;
-  }
+      const unscored = rubric.flatMap(c => c.indicators).filter(i => state.scores[i.id] == null);
+      if (unscored.length) {
+        showStatus(`Бүх үзүүлэлтийг үнэлнэ үү. Үлдсэн: ${unscored.length}`, false);
+        return;
+      }
 
-  await submitToGoogleSheet(payload);
-  showStatus("Хадгалах хүсэлт илгээгдлээ.", true);
-}
-   
-const submitBtn = document.getElementById("submitBtn");
-if (submitBtn) submitBtn.addEventListener("click", submitEvaluation);
-        document.getElementById("excelBtn").addEventListener("click", downloadExcelCSV);
+      await submitToGoogleSheet(payload);
+      showStatus("Хадгалах хүсэлт илгээгдлээ.", true);
+    }
+
+    const submitBtn = document.getElementById("submitBtn");
+    if (submitBtn) submitBtn.addEventListener("click", submitEvaluation);
+    document.getElementById("excelBtn").addEventListener("click", downloadExcelCSV);
+
     renderCriteria();
     renderSummary();
   </script>
