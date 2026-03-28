@@ -247,8 +247,6 @@
 </textarea>
         </div>
 
-       
-
         <button class="btn btn-success" id="submitBtn">Үнэлгээ илгээх</button>
         <div id="statusBox" class="status" style="margin-top:12px;"></div>
 
@@ -595,7 +593,7 @@ ${weakest.map((x, i) =>
       const percent = Math.round((total/max)*100);
 
       return {
-        courseName: document.getElementById("courseName").value,
+  
         courseCode: document.getElementById("courseCode").value,
         evaluator: document.getElementById("evaluator").value,
         evalDate: document.getElementById("evalDate").value,
@@ -614,7 +612,7 @@ ${weakest.map((x, i) =>
 
     function flattenPayload(payload){
       const base = {
-        courseName: payload.courseName,
+ 
         courseCode: payload.courseCode,
         evaluator: payload.evaluator,
         evalDate: payload.evalDate,
@@ -623,7 +621,7 @@ ${weakest.map((x, i) =>
         percent: payload.percent,
         quality: payload.quality,
         overallAiAdvice: payload.overallAiAdvice,
-        notes: payload.notes,
+    
         exportedAt: payload.exportedAt,
       };
 
@@ -680,7 +678,7 @@ ${weakest.map((x, i) =>
     async function submitEvaluation() {
       const payload = getPayload();
 
-      if (!payload.courseName || !payload.courseCode || !payload.evaluator) {
+      if (!payload.courseCode || !payload.evaluator) {
         showStatus("Хичээлийн нэр, код, үнэлгээ хийж буй багшийн нэрийг бүрэн оруулна уу.", false);
         return;
       }
