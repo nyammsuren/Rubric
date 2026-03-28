@@ -148,11 +148,7 @@
     }
     .gauge-title{font-weight:800;margin:0 0 6px;font-size:16px}
     .gauge-sub{font-size:12px;color:var(--muted);margin-bottom:8px}
-
-.gauge-wrap{
-  width:100%;
-  display:block;
-}
+    .gauge-wrap{display:flex;align-items:center;justify-content:center}
     .ai-box{
       margin-top:10px;padding:12px 14px;border-radius:14px;background:#f8fbff;border:1px solid #dbe5ff
     }
@@ -205,7 +201,8 @@
         <div class="field"><label>Хичээлийн код</label><input id="courseCode" placeholder="Жишээ: M.IT203" /></div>
         <div class="field"><label>Үнэлгээ хийх багшийн нэр</label><input id="evaluator" placeholder="Жишээ: Эксперт 1" /></div>
         <div class="field"><label>Огноо</label><input id="evalDate" type="date" /></div>
-
+    <button class="btn btn-success" id="submitBtn">Үнэлэх</button>
+        <button class="btn btn-primary" id="excelBtn">Excel татах</button>
         <button class="btn btn-ghost" id="resetBtn">Цэвэрлэх</button>
       </div>
       <div id="statusBox" class="status" style="margin-top:12px;"></div>
@@ -227,7 +224,7 @@
           <div class="bars" id="bars"></div>
           <div class="legend">
             <div><strong>Тайлбарлах босго</strong></div>
-            <div>90–100% → Жишиг хичээл</div>
+            <div>90–100% → Маш өндөр чанартай</div>
             <div>75–89% → Бага зэргийн засвар хэрэгтэй </div>
             <div>60–74% → Дунд зэргийн засвар хийх шаардлагатай</div>
             <div>&lt;60% → Сайжруулах шаардлагатай</div>
@@ -245,8 +242,6 @@
           <label for="notes" style="display:block;font-weight:800;margin-bottom:10px;">Тэмдэглэл</label>
           <textarea id="notes" placeholder="Нэмэлт ажиглалт, тайлбар"></textarea>
         </div>
-            <button class="btn btn-success" id="submitBtn">Үнэлэх</button>
-        <button class="btn btn-primary" id="excelBtn">Excel татах</button>
       </aside>
     </section>
   </div>
@@ -293,7 +288,7 @@
       ]}
     ];
 
-    state.scores = {};
+    const state = { scores: {} };
 
     const criteriaEl = document.getElementById("criteria");
     const barsEl = document.getElementById("bars");
@@ -337,7 +332,7 @@
     }
 
     function getQualityLabel(percent){
-      if (percent >= 90) return "Жишиг хичээл";
+      if (percent >= 90) return "Маш өндөр чанартай";
       if (percent >= 75) return "Бага зэргийн засвар хэрэгтэй";
       if (percent >= 60) return "Дунд зэргийн засвар хийх шаардлагатай";
       return "Сайжруулах шаардлагатай";
@@ -350,37 +345,24 @@
     function totalScore(){
       return rubric.reduce((sum, criterion) => sum + criterionTotal(criterion), 0);
     }
-function progressBar(percent){
-  let color = "#ef4444"; // red
-  if(percent >= 70) color = "#16a34a";
-  else if(percent >= 40) color = "#f59e0b";
 
-  return `
-  <div style="margin:10px 0;">
-    
-    <div style="display:flex; justify-content:space-between; font-size:14px;">
-      <span>Таны үнэлгээ </span>
-      <strong style="color:${color}"> ${percent}%</strong>
-    </div>
+    function gaugeSVG(percent){
+      const angle = -90 + (percent/100)*180;
+      return `
+      <svg width="220" height="140" viewBox="0 0 220 140" aria-hidden="true">
+        <path d="M20 120 A90 90 0 0 1 200 120" fill="none" stroke="#e5e7eb" stroke-width="18" stroke-linecap="round"/>
+        <path d="M20 120 A90 90 0 0 1 74 42" fill="none" stroke="#ef4444" stroke-width="18"/>
+        <path d="M74 42 A90 90 0 0 1 146 42" fill="none" stroke="#f59e0b" stroke-width="18"/>
+        <path d="M146 42 A90 90 0 0 1 200 120" fill="none" stroke="#16a34a" stroke-width="18"/>
+        <g transform="translate(110 120)">
+          <line x1="0" y1="0" x2="0" y2="-62" stroke="#666" stroke-width="5" stroke-linecap="round" transform="rotate(${angle})"/>
+          <circle cx="0" cy="0" r="7" fill="#666"/>
+        </g>
+        <text x="110" y="114" text-anchor="middle" font-size="14" fill="#64748b"> </text>
+        <text x="110" y="136" text-anchor="middle" font-size="28" font-weight="800" fill="#1f2937">${percent}%</text>
+      </svg>`;
+    }
 
-    <div style="
-      width:100%;
-      height:10px;
-      background:#e5e7eb;
-      border-radius:6px;
-      overflow:hidden;
-      margin-top:6px;
-    ">
-      <div style="
-        width:${percent}%;
-        height:100%;
-        background:${color};
-        transition:0.5s;
-      "></div>
-    </div>
-
-  </div>`;
-}
     function getCriterionAiAdvice(criterion){
       const lowIndicators = criterion.indicators
         .map(ind => ({ ...ind, score: state.scores[ind.id] ?? 0 }))
@@ -427,25 +409,23 @@ function progressBar(percent){
     }
 
     function renderDashboard(){
-  dashboardEl.innerHTML = "";
-  rubric.forEach(criterion => {
-    const score = criterionTotal(criterion);
-    const percent = Math.round((score / criterion.max) * 100);
-
-    const card = document.createElement("div");
-    card.className = "gauge-card";
-    card.innerHTML = `
-      <div class="gauge-title">${criterion.title}</div>
-      <div class="gauge-sub">${score}/${criterion.max} — Таны үнэлгээ</div>
-      <div class="gauge-wrap">${progressBar(percent)}</div>
-      <div class="ai-box">
-        <div class="ai-title">AI зөвлөмж</div>
-        <div class="ai-text">${getCriterionAiAdvice(criterion)}</div>
-      </div>
-    `;
-    dashboardEl.appendChild(card);
-  });
-}
+      dashboardEl.innerHTML = "";
+      rubric.forEach(criterion => {
+        const score = criterionTotal(criterion);
+        const percent = Math.round((score/criterion.max)*100);
+        const card = document.createElement("div");
+        card.className = "gauge-card";
+        card.innerHTML = `
+          <div class="gauge-title">${criterion.title}</div>
+          <div class="gauge-sub">${score}/${criterion.max} — Таны үнэлгээ</div>
+          <div class="gauge-wrap">${gaugeSVG(percent)}</div>
+          <div class="ai-box">
+            <div class="ai-title">AI зөвлөмж</div>
+            <div class="ai-text">${getCriterionAiAdvice(criterion)}</div>
+          </div>`;
+        dashboardEl.appendChild(card);
+      });
+    }
 
     function renderSummary(){
       const total = totalScore();
