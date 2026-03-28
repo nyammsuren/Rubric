@@ -643,16 +643,7 @@ document.addEventListener("DOMContentLoaded", function () {
   await submitToGoogleSheet(payload);
   showStatus("Хадгалах хүсэлт илгээгдлээ.", true);
 }
-    function resetAll(){
-      state.scores = {};
-      ["courseName","courseCode","evaluator","notes","evalDate"].forEach(id => {
-        document.getElementById(id).value = "";
-      });
-      statusBox.className = "status";
-      statusBox.textContent = "";
-      renderCriteria();
-      renderSummary();
-    }
+   
 const submitBtn = document.getElementById("submitBtn");
 if (submitBtn) submitBtn.addEventListener("click", submitEvaluation);
     document.getElementById("resetBtn").addEventListener("click", resetAll);
