@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Онлайн сургалтыг үнэлэх НН шалгуур</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root{
       --bg:#f6f8fc;
@@ -148,7 +149,7 @@
     }
     .gauge-title{font-weight:800;margin:0 0 6px;font-size:16px}
     .gauge-sub{font-size:12px;color:var(--muted);margin-bottom:8px}
-    .gauge-wrap{display:flex;align-items:center;justify-content:center}
+
     .ai-box{
       margin-top:10px;padding:12px 14px;border-radius:14px;background:#f8fbff;border:1px solid #dbe5ff
     }
@@ -361,25 +362,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return rubric.reduce((sum, criterion) => sum + criterionTotal(criterion), 0);
     }
 
-    function gaugeSVG(percent){
-      const angle = -90 + (percent/100)*180;
-      return `
-      <svg width="220" height="140" viewBox="0 0 220 140" aria-hidden="true">
-        <path d="M20 120 A90 90 0 0 1 200 120" fill="none" stroke="#e5e7eb" stroke-width="18" stroke-linecap="round"/>
-        <path d="M20 120 A90 90 0 0 1 74 42" fill="none" stroke="#ef4444" stroke-width="18"/>
-        <path d="M74 42 A90 90 0 0 1 146 42" fill="none" stroke="#f59e0b" stroke-width="18"/>
-        <path d="M146 42 A90 90 0 0 1 200 120" fill="none" stroke="#16a34a" stroke-width="18"/>
-        <g transform="translate(110 120)">
-          <line x1="0" y1="0" x2="0" y2="-62" stroke="#666" stroke-width="5" stroke-linecap="round" transform="rotate(${angle})"/>
-          <circle cx="0" cy="0" r="7" fill="#666"/>
-        </g>
-        <text x="110" y="114" text-anchor="middle" font-size="14" fill="#64748b"> </text>
-    
-        <text x="200" y="25" text-anchor="end" font-size="26" font-weight="800" fill="#f59e0b">
-      ${percent}%
-    </text>
-      </svg>`;
-    }
 
     function getCriterionAiAdvice(criterion){
       const lowIndicators = criterion.indicators
@@ -427,24 +409,56 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function renderDashboard(){
-      dashboardEl.innerHTML = "";
-      rubric.forEach(criterion => {
-        const score = criterionTotal(criterion);
-        const percent = Math.round((score/criterion.max)*100);
-        const card = document.createElement("div");
-        card.className = "gauge-card";
-        card.innerHTML = `
-          <div class="gauge-title">${criterion.title}</div>
-          <div class="gauge-sub">${score}/${criterion.max} — Таны үнэлгээ</div>
-          <div class="gauge-wrap">${gaugeSVG(percent)}</div>
-          <div class="ai-box">
-            <div class="ai-title">AI зөвлөмж</div>
-            <div class="ai-text">${getCriterionAiAdvice(criterion)}</div>
-          </div>`;
-        dashboardEl.appendChild(card);
-      });
-    }
+  dashboardEl.innerHTML = "";
 
+  rubric.forEach((criterion, index) => {
+    const score = criterionTotal(criterion);
+    const percent = Math.round((score/criterion.max)*100);
+
+    const card = document.createElement("div");
+    card.className = "gauge-card";
+
+    const canvasId = "chart_" + index;
+
+    card.innerHTML = `
+      <div class="gauge-title">${criterion.title}</div>
+      <canvas id="${canvasId}" height="160"></canvas>
+    `;
+
+    dashboardEl.appendChild(card);
+
+    new Chart(document.getElementById(canvasId), {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [percent, 100 - percent],
+          backgroundColor: ['#315efb', '#e5e7eb'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        cutout: '70%',
+        plugins: {
+          tooltip: { enabled: false },
+          legend: { display: false }
+        }
+      },
+      plugins: [{
+        id: 'centerText',
+        beforeDraw(chart) {
+          const {width, height} = chart;
+          const ctx = chart.ctx;
+          ctx.restore();
+          ctx.font = "bold 20px sans-serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(percent + "%", width / 2, height / 2);
+          ctx.save();
+        }
+      }]
+    });
+  });
+}
     function renderSummary(){
       const total = totalScore();
       const max = 216;
